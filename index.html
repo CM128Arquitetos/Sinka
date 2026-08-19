@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- SINKA SITE COMERCIAL — INDEX(9) + ABERTURA PROFISSIONAL / K FINAL MELHORADO -->
+<!-- SINKA SITE COMERCIAL — INDEX(9) + ABERTURA RÁPIDA / SEM PISCAR -->
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
@@ -612,47 +612,47 @@
     /* S — entrada lateral curta */
     .sinka-letter.s{
       transform:translateX(-24px);
-      animation:sinkaEnterLeft .52s cubic-bezier(.18,.82,.2,1) .14s forwards;
+      animation:sinkaEnterLeft .34s cubic-bezier(.18,.82,.2,1) .05s forwards;
     }
 
     /* I — haste é "construída" verticalmente */
     .sinka-letter.istem{
       opacity:1;
       clip-path:inset(100% 0 0 0);
-      animation:sinkaBuildStem .46s cubic-bezier(.2,.8,.2,1) .46s forwards;
+      animation:sinkaBuildStem .30s cubic-bezier(.2,.8,.2,1) .20s forwards;
     }
 
     /* ponto do I encaixa depois da haste */
     .sinka-letter.idot{
       transform:translateY(-18px) scale(.92);
-      animation:sinkaDotSet .42s cubic-bezier(.18,.95,.24,1) .78s forwards;
+      animation:sinkaDotSet .25s cubic-bezier(.18,.95,.24,1) .39s forwards;
     }
 
     /* N — revelação limpa, sem deslocamento forte */
     .sinka-letter.n{
       opacity:1;
       clip-path:inset(0 100% 0 0);
-      animation:sinkaRevealHorizontal .52s cubic-bezier(.2,.8,.2,1) .72s forwards;
+      animation:sinkaRevealHorizontal .34s cubic-bezier(.2,.8,.2,1) .34s forwards;
     }
 
     /* A chega antes do K, deixando o "encaixe" central para o toque final */
     .sinka-letter.a{
       transform:translateX(24px);
-      animation:sinkaEnterRight .52s cubic-bezier(.18,.82,.2,1) 1.02s forwards;
+      animation:sinkaEnterRight .34s cubic-bezier(.18,.82,.2,1) .56s forwards;
     }
 
     /* K — assinatura final da marca */
     .sinka-letter.k{
-      transform:translateY(-78px) scale(.82);
+      transform:translateY(-50px) scale(.86);
       transform-origin:50% 54%;
-      animation:sinkaKSignature .9s cubic-bezier(.18,.9,.2,1) 1.42s forwards;
+      animation:sinkaKSignature .56s cubic-bezier(.18,.9,.2,1) .80s forwards;
       z-index:4;
     }
 
     /* ® surge apenas quando a marca já está montada */
     .sinka-letter.reg{
       transform:translateY(-6px);
-      animation:sinkaRegIn .34s ease 1.92s forwards;
+      animation:sinkaRegIn .20s ease 1.26s forwards;
     }
 /* respiração final da marca completa */
     .sinka-logo-build.is-complete{
@@ -660,21 +660,14 @@
     }
 
     #sinkaIntro.is-leaving{
-      animation:sinkaIntroFade .62s ease forwards;
+      animation:sinkaIntroFade .18s ease forwards;
       pointer-events:none;
     }
 
     #sinkaIntro.is-leaving .sinka-logo-build{
-      animation:sinkaLogoLeave .55s cubic-bezier(.2,.8,.2,1) forwards;
+      animation:sinkaLogoLeave .16s ease forwards;
     }
 
-    body.sinka-intro-ready .topbar{
-      animation:sinkaHeaderAfterIntro .48s cubic-bezier(.2,.8,.2,1) both;
-    }
-
-    body.sinka-intro-ready .hero .hero-grid{
-      animation:sinkaHeroAfterIntro .68s cubic-bezier(.2,.8,.2,1) both;
-    }
 
     @keyframes sinkaEnterLeft{
       from{opacity:0;transform:translateX(-24px)}
@@ -705,7 +698,7 @@
     @keyframes sinkaKSignature{
       0%{
         opacity:0;
-        transform:translateY(-78px) scale(.82)
+        transform:translateY(-50px) scale(.86)
       }
       45%{
         opacity:1;
@@ -748,7 +741,7 @@
     }
 
     @keyframes sinkaLogoLeave{
-      to{opacity:0;transform:translateY(-10px) scale(.992)}
+      to{opacity:0;transform:scale(.999)}
     }
 
     @keyframes sinkaIntroFade{
@@ -756,13 +749,6 @@
       to{opacity:0;visibility:hidden}
     }
 
-    @keyframes sinkaHeaderAfterIntro{
-      from{opacity:0;transform:translateY(-10px)}
-      to{opacity:1;transform:translateY(0)}
-    }
-
-    @keyframes sinkaHeroAfterIntro{
-      from{opacity:0;transform:translateY(14px)}
       to{opacity:1;transform:translateY(0)}
     }
 
@@ -775,10 +761,6 @@
     @media(prefers-reduced-motion:reduce){
       #sinkaIntro{display:none!important}
       body.sinka-intro-running{overflow:auto}
-      body.sinka-intro-ready .topbar,
-      body.sinka-intro-ready .hero .hero-grid{
-        animation:none!important
-      }
     }
 
   </style>
@@ -797,6 +779,59 @@
       <img class="sinka-letter reg" src="data:image/png;base64,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" style="left:96.533203%;top:0.496689%;width:3.466797%;height:11.589404%;" alt="">
     </div>
   </div>
+  <script>
+    (() => {
+      const intro = document.getElementById("sinkaIntro");
+      const build = document.getElementById("sinkaLogoBuild");
+      if (!intro || !build) return;
+
+      const reduceMotion = window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      const MINIMUM_INTRO_MS = 1400;
+      let domReady = document.readyState !== "loading";
+      let minimumDone = false;
+      let leaving = false;
+
+      const finishIntro = () => {
+        document.body.classList.remove("sinka-intro-running");
+        if (intro && intro.isConnected) intro.remove();
+      };
+
+      const tryLeave = () => {
+        if (leaving || !domReady || !minimumDone) return;
+        leaving = true;
+        build.classList.add("is-complete");
+        intro.classList.add("is-leaving");
+        window.setTimeout(finishIntro, 190);
+      };
+
+      if (reduceMotion) {
+        finishIntro();
+        return;
+      }
+
+      if (!domReady) {
+        document.addEventListener("DOMContentLoaded", () => {
+          domReady = true;
+          tryLeave();
+        }, { once: true });
+      }
+
+      window.setTimeout(() => {
+        minimumDone = true;
+        tryLeave();
+      }, MINIMUM_INTRO_MS);
+
+      // fallback de segurança
+      window.setTimeout(() => {
+        domReady = true;
+        minimumDone = true;
+        tryLeave();
+      }, 2800);
+    })();
+  </script>
+
 
 
   <header class="topbar" id="topbar">
@@ -1430,44 +1465,7 @@
   </footer>
 
   <script>
-
-    // Abertura Sinka — montagem profissional da logomarca.
-    (() => {
-      const intro = document.getElementById("sinkaIntro");
-      const build = document.getElementById("sinkaLogoBuild");
-      if (!intro || !build) return;
-
-      const reduceMotion = window.matchMedia &&
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-      const finishIntro = () => {
-        document.body.classList.remove("sinka-intro-running");
-        document.body.classList.add("sinka-intro-ready");
-        if (intro && document.body.contains(intro)) intro.remove();
-      };
-
-      if (reduceMotion) {
-        finishIntro();
-        return;
-      }
-
-      // Marca completa: pequena pausa para leitura.
-      window.setTimeout(() => {
-        build.classList.add("is-complete");
-      }, 2140);
-
-      // Saída limpa, sem cortina e sem sombreado.
-      window.setTimeout(() => {
-        intro.classList.add("is-leaving");
-      }, 2740);
-
-      window.setTimeout(finishIntro, 3420);
-
-      // fallback
-      window.setTimeout(finishIntro, 4500);
-    })();
-
-    const topbar = document.getElementById("topbar");
+const topbar = document.getElementById("topbar");
     const menuBtn = document.getElementById("menuBtn");
     const mobilePanel = document.getElementById("mobilePanel");
 
