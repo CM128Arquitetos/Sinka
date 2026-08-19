@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- SINKA SITE COMERCIAL — INDEX(9) + ABERTURA PROFISSIONAL / K FINAL SEM TRAÇO -->
+<!-- SINKA SITE COMERCIAL — INDEX(9) + ABERTURA PROFISSIONAL / K FINAL MELHORADO -->
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
@@ -643,9 +643,9 @@
 
     /* K — assinatura final da marca */
     .sinka-letter.k{
-      transform:translateY(18px) scale(.86);
+      transform:translateY(-78px) scale(.82);
       transform-origin:50% 54%;
-      animation:sinkaKSignature .68s cubic-bezier(.16,1.02,.28,1) 1.42s forwards;
+      animation:sinkaKSignature .9s cubic-bezier(.18,.9,.2,1) 1.42s forwards;
       z-index:4;
     }
 
@@ -705,15 +705,31 @@
     @keyframes sinkaKSignature{
       0%{
         opacity:0;
-        transform:translateY(18px) scale(.86)
+        transform:translateY(-78px) scale(.82)
       }
-      64%{
+      45%{
         opacity:1;
-        transform:translateY(-2px) scale(1.035)
+        transform:translateY(10px) scale(1.08)
+      }
+      60%{
+        opacity:1;
+        transform:translateY(-4px) scale(.985)
+      }
+      72%{
+        opacity:1;
+        transform:translateX(-4px) translateY(1px) scale(1.02)
+      }
+      82%{
+        opacity:1;
+        transform:translateX(4px) translateY(0) scale(1.01)
+      }
+      90%{
+        opacity:1;
+        transform:translateX(-2px) translateY(0) scale(1.004)
       }
       100%{
         opacity:1;
-        transform:translateY(0) scale(1)
+        transform:translateX(0) translateY(0) scale(1)
       }
     }
 
