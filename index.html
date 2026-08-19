@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- SINKA V1.8.0 — PAINEL EXECUTIVO -->
 <!-- SINKA V1.7.0 — DOCUMENTOS + SUPABASE STORAGE -->
 <!-- SINKA V1.6.2 — LIMPEZA DA EQUIPE / SAIR DO ESCRITÓRIO -->
 <!-- SINKA V1.6.1 — CONVITES POR E-MAIL -->
@@ -181,6 +182,106 @@
     @media(max-width:900px){.settings-grid{grid-template-columns:1fr}}
 
 
+
+
+    /* ---------- PAINEL EXECUTIVO v1.8 ---------- */
+    .executive-hero{
+      display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:13px;
+      padding:17px 18px;border:1px solid var(--line);border-radius:15px;background:#fff;
+      box-shadow:0 5px 18px rgba(8,39,31,.035)
+    }
+    .executive-hero h2{margin:0;font-size:18px;letter-spacing:-.035em}
+    .executive-hero p{margin:5px 0 0;font-size:9px;color:var(--muted);line-height:1.5}
+    .executive-updated{font-size:8px;color:#7d8983;white-space:nowrap}
+    .executive-kpis{
+      display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px;margin-bottom:12px
+    }
+    .executive-kpi{
+      background:#fff;border:1px solid var(--line);border-radius:13px;padding:13px 14px;
+      min-height:88px;box-shadow:0 5px 18px rgba(8,39,31,.025)
+    }
+    .executive-kpi span{display:block;font-size:8px;color:#74827b;text-transform:uppercase;letter-spacing:.05em;font-weight:850}
+    .executive-kpi strong{display:block;font-size:22px;margin-top:8px;letter-spacing:-.04em}
+    .executive-kpi small{display:block;margin-top:5px;font-size:8px;color:#728078}
+    .executive-kpi.alert strong,.executive-kpi.alert small{color:#c54049}
+    .executive-grid{
+      display:grid;grid-template-columns:minmax(0,1.4fr) minmax(300px,.8fr);gap:12px;margin-bottom:12px
+    }
+    .executive-grid.equal{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .executive-card{
+      background:#fff;border:1px solid var(--line);border-radius:15px;overflow:hidden;
+      box-shadow:0 5px 18px rgba(8,39,31,.025)
+    }
+    .executive-card-head{
+      min-height:48px;padding:0 14px;border-bottom:1px solid var(--line);
+      display:flex;align-items:center;justify-content:space-between;gap:10px
+    }
+    .executive-card-head strong{font-size:11px}
+    .executive-card-head span{font-size:8px;color:#7d8983}
+    .executive-card-body{padding:14px}
+    .bars-chart{
+      height:190px;display:flex;align-items:flex-end;gap:12px;padding:8px 4px 2px
+    }
+    .bar-group{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+    .bar-number{font-size:8px;font-weight:900;color:#53645c;margin-bottom:5px}
+    .bar-column{
+      width:min(32px,70%);min-height:3px;border-radius:7px 7px 3px 3px;
+      background:linear-gradient(180deg,#198662,#0b5f46)
+    }
+    .bar-label{margin-top:7px;font-size:7px;color:#7d8983;text-transform:uppercase;font-weight:800;white-space:nowrap}
+    .status-bars{display:grid;gap:10px}
+    .status-row{display:grid;grid-template-columns:94px 1fr 32px;gap:9px;align-items:center}
+    .status-row span{font-size:8px;color:#5f7068;white-space:nowrap}
+    .status-track{height:8px;border-radius:99px;background:#edf2ef;overflow:hidden}
+    .status-track i{display:block;height:100%;border-radius:99px;background:#166e52}
+    .status-row strong{font-size:8px;text-align:right}
+    .status-track.planning i{background:#7b8da7}
+    .status-track.waiting i{background:#c7953f}
+    .status-track.completed i{background:#1a9066}
+    .status-track.paused i{background:#a07071}
+    .status-track.todo i{background:#81958c}
+    .status-track.in_progress i{background:#2b80b9}
+    .status-track.review i{background:#8b6fb1}
+    .status-track.done i{background:#1a9066}
+    .panel-list{display:grid;gap:0}
+    .panel-list-row{
+      display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;
+      padding:10px 0;border-bottom:1px solid #edf1ef
+    }
+    .panel-list-row:first-child{padding-top:0}
+    .panel-list-row:last-child{border-bottom:0;padding-bottom:0}
+    .panel-list-main{min-width:0}
+    .panel-list-main strong{display:block;font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .panel-list-main span{display:block;margin-top:3px;font-size:8px;color:#7d8983;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .panel-value{text-align:right}
+    .panel-value strong{display:block;font-size:9px}
+    .panel-value span{display:block;margin-top:3px;font-size:7px;color:#86918c}
+    .health-pill{
+      display:inline-flex;align-items:center;height:24px;padding:0 8px;border-radius:999px;
+      font-size:7px;font-weight:900;background:#edf8f2;color:#14815b
+    }
+    .health-pill.attention{background:#fff7e9;color:#9a6819}
+    .health-pill.critical{background:#fff0f1;color:#b8313b}
+    .team-load-row{display:grid;grid-template-columns:34px minmax(0,1fr) 44px;gap:9px;align-items:center;padding:8px 0;border-bottom:1px solid #edf1ef}
+    .team-load-row:last-child{border-bottom:0}
+    .team-load-avatar{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#e9f1ed;color:#164d3a;font-size:8px;font-weight:950;overflow:hidden}
+    .team-load-avatar img{width:100%;height:100%;object-fit:cover}
+    .team-load-main strong{display:block;font-size:9px}
+    .team-load-main span{display:block;font-size:7px;color:#83908a;margin-top:2px}
+    .team-load-track{height:5px;background:#edf2ef;border-radius:99px;overflow:hidden;margin-top:5px}
+    .team-load-track i{display:block;height:100%;background:#187456;border-radius:99px}
+    .team-load-count{text-align:right;font-size:8px;font-weight:900}
+    .panel-empty{text-align:center;padding:26px 12px;color:#829089;font-size:9px;line-height:1.5}
+    @media(max-width:1180px){
+      .executive-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
+    }
+    @media(max-width:900px){
+      .executive-grid,.executive-grid.equal{grid-template-columns:1fr}
+    }
+    @media(max-width:620px){
+      .executive-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .executive-hero{align-items:flex-start;flex-direction:column}
+    }
 
     /* ---------- DOCUMENTOS v1.7 ---------- */
     .documents-layout{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
@@ -998,6 +1099,91 @@ const SINKA_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_...";</div>
         </div>
       </section>
 
+
+      <section id="panelPage" class="module-view hidden">
+        <div class="executive-hero">
+          <div>
+            <h2>Visão do escritório</h2>
+            <p>Projetos, produtividade, prazos e carga da equipe reunidos em uma visão gerencial.</p>
+          </div>
+          <div class="executive-updated" id="panelUpdatedAt">Atualizando...</div>
+        </div>
+
+        <div class="executive-kpis">
+          <div class="executive-kpi"><span>Clientes</span><strong id="panelClients">0</strong><small>cadastrados</small></div>
+          <div class="executive-kpi"><span>Projetos ativos</span><strong id="panelActiveProjects">0</strong><small id="panelProjectsNote">em andamento</small></div>
+          <div class="executive-kpi"><span>Tarefas abertas</span><strong id="panelOpenTasks">0</strong><small>pendências da equipe</small></div>
+          <div class="executive-kpi alert"><span>Tarefas atrasadas</span><strong id="panelLateTasks">0</strong><small id="panelLateNote">precisam de atenção</small></div>
+          <div class="executive-kpi"><span>Equipe</span><strong id="panelTeam">0</strong><small>usuários ativos</small></div>
+          <div class="executive-kpi"><span>Documentos</span><strong id="panelDocuments">0</strong><small id="panelDocumentsSize">0 B armazenados</small></div>
+        </div>
+
+        <div class="executive-grid">
+          <section class="executive-card">
+            <div class="executive-card-head">
+              <strong>Tarefas concluídas — últimos 6 meses</strong>
+              <span>produtividade da equipe</span>
+            </div>
+            <div class="executive-card-body">
+              <div class="bars-chart" id="panelCompletedChart"></div>
+            </div>
+          </section>
+
+          <section class="executive-card">
+            <div class="executive-card-head">
+              <strong>Projetos por status</strong>
+              <span id="panelProjectCountLabel">0 projetos</span>
+            </div>
+            <div class="executive-card-body">
+              <div class="status-bars" id="panelProjectStatus"></div>
+            </div>
+          </section>
+        </div>
+
+        <div class="executive-grid equal">
+          <section class="executive-card">
+            <div class="executive-card-head">
+              <strong>Fluxo das tarefas</strong>
+              <span>situação atual</span>
+            </div>
+            <div class="executive-card-body">
+              <div class="status-bars" id="panelTaskStatus"></div>
+            </div>
+          </section>
+
+          <section class="executive-card">
+            <div class="executive-card-head">
+              <strong>Carga da equipe</strong>
+              <span>tarefas abertas atribuídas</span>
+            </div>
+            <div class="executive-card-body" id="panelTeamLoad"></div>
+          </section>
+        </div>
+
+        <div class="executive-grid equal">
+          <section class="executive-card">
+            <div class="executive-card-head">
+              <strong>Projetos que exigem atenção</strong>
+              <span>saúde e prazo</span>
+            </div>
+            <div class="executive-card-body">
+              <div class="panel-list" id="panelAttentionProjects"></div>
+            </div>
+          </section>
+
+          <section class="executive-card">
+            <div class="executive-card-head">
+              <strong>Próximos prazos</strong>
+              <span>projetos e tarefas</span>
+            </div>
+            <div class="executive-card-body">
+              <div class="panel-list" id="panelNextDeadlines"></div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+
       <section id="clientsPage" class="module-view hidden">
         <div class="data-summary">
           <div class="summary-chip"><span>CLIENTES CADASTRADOS</span><strong id="clientsTotal">0</strong></div>
@@ -1317,7 +1503,7 @@ const SINKA_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_...";</div>
               <div class="settings-info-row"><span>Nome</span><strong id="settingsWorkspaceName">—</strong></div>
               <div class="settings-info-row"><span>Seu acesso</span><strong id="settingsWorkspaceRole">—</strong></div>
               <div class="settings-info-row"><span>Usuários ativos</span><strong id="settingsWorkspaceMembers">—</strong></div>
-              <div class="settings-info-row"><span>Versão do sistema</span><strong>1.7.0</strong></div>
+              <div class="settings-info-row"><span>Versão do sistema</span><strong>1.8.0</strong></div>
             </div>
             <div class="sync-callout">
               Planos, cobrança e licença do escritório serão adicionados nesta mesma área em uma etapa futura.
@@ -1991,6 +2177,221 @@ const SINKA_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_...";</div>
     return new Date(iso).toLocaleDateString("pt-BR",{day:"2-digit",month:"short"}).replace(".","");
   }
 
+
+  function panelMonthBuckets(){
+    const rows=[];
+    const base=new Date();
+    base.setDate(1);
+    base.setHours(0,0,0,0);
+
+    for(let i=5;i>=0;i--){
+      const start=new Date(base.getFullYear(),base.getMonth()-i,1);
+      const end=new Date(base.getFullYear(),base.getMonth()-i+1,1);
+      rows.push({
+        start,
+        end,
+        label:start.toLocaleDateString("pt-BR",{month:"short"}).replace(".","").toUpperCase()
+      });
+    }
+    return rows;
+  }
+
+  function projectStatusLabelPanel(status){
+    return {
+      planning:"Planejamento",
+      active:"Em andamento",
+      waiting:"Aguardando",
+      paused:"Pausado",
+      completed:"Concluído",
+      archived:"Arquivado"
+    }[status]||status||"Sem status";
+  }
+
+  function taskStatusLabelPanel(status){
+    return {
+      todo:"A fazer",
+      in_progress:"Em andamento",
+      waiting:"Aguardando",
+      review:"Revisão",
+      done:"Concluído",
+      cancelled:"Cancelado"
+    }[status]||status||"Sem status";
+  }
+
+  function renderExecutiveStatusBars(target,rows,total,type){
+    const el=document.getElementById(target);
+    if(!rows.length||!total){
+      el.innerHTML='<div class="panel-empty">Ainda não há dados suficientes para este indicador.</div>';
+      return;
+    }
+
+    el.innerHTML=rows.map(row=>{
+      const pct=Math.round((row.count/total)*100);
+      const label=type==="project"?projectStatusLabelPanel(row.key):taskStatusLabelPanel(row.key);
+      return `<div class="status-row">
+        <span>${esc(label)}</span>
+        <div class="status-track ${esc(row.key)}"><i style="width:${pct}%"></i></div>
+        <strong>${row.count}</strong>
+      </div>`;
+    }).join("");
+  }
+
+  async function loadExecutivePanel(){
+    if(!ctx.workspace?.id)return;
+    const wid=ctx.workspace.id;
+    const now=new Date();
+    const nowISO=now.toISOString();
+    const todayKey=now.toISOString().slice(0,10);
+    const monthBuckets=panelMonthBuckets();
+    const firstMonth=monthBuckets[0].start.toISOString();
+
+    const [
+      clientsRes,
+      projectsRes,
+      tasksRes,
+      documentsRes,
+      completedRes,
+      assignmentsRes,
+      memberRows
+    ]=await Promise.all([
+      sb.from("sinka_clients").select("id",{count:"exact"}).eq("workspace_id",wid),
+      sb.from("sinka_projects").select("id,name,status,pulse_status,progress,due_date,project_type").eq("workspace_id",wid),
+      sb.from("sinka_tasks").select("id,title,status,priority,due_at,completed_at,project_id,sinka_projects(name)").eq("workspace_id",wid),
+      sb.from("sinka_documents").select("id,file_size").eq("workspace_id",wid),
+      sb.from("sinka_tasks").select("id,completed_at").eq("workspace_id",wid).eq("status","done").not("completed_at","is",null).gte("completed_at",firstMonth),
+      sb.from("sinka_task_assignees").select("user_id,sinka_tasks!inner(id,status)").eq("workspace_id",wid).not("sinka_tasks.status","in",'("done","cancelled")'),
+      sb.rpc("sinka_list_workspace_members",{p_workspace_id:wid})
+    ]);
+
+    [clientsRes,projectsRes,tasksRes,documentsRes,completedRes,assignmentsRes,memberRows].forEach(r=>{
+      if(r?.error)console.warn("Painel:",r.error);
+    });
+
+    const projects=projectsRes.data||[];
+    const tasks=tasksRes.data||[];
+    const documents=documentsRes.data||[];
+    const members=(memberRows.data||[]).filter(m=>m.status==="active");
+    const activeProjects=projects.filter(p=>["planning","active","waiting","paused"].includes(p.status));
+    const openTasks=tasks.filter(t=>!["done","cancelled"].includes(t.status));
+    const lateTasks=openTasks.filter(t=>t.due_at&&new Date(t.due_at)<now);
+
+    document.getElementById("panelClients").textContent=clientsRes.count??(clientsRes.data||[]).length;
+    document.getElementById("panelActiveProjects").textContent=activeProjects.length;
+    document.getElementById("panelOpenTasks").textContent=openTasks.length;
+    document.getElementById("panelLateTasks").textContent=lateTasks.length;
+    document.getElementById("panelTeam").textContent=members.length;
+    document.getElementById("panelDocuments").textContent=documents.length;
+    document.getElementById("panelDocumentsSize").textContent=`${formatFileSize(documents.reduce((s,d)=>s+Number(d.file_size||0),0))} armazenados`;
+    document.getElementById("panelProjectsNote").textContent=activeProjects.length===1?"projeto em acompanhamento":"projetos em acompanhamento";
+    document.getElementById("panelLateNote").textContent=lateTasks.length?"precisam de atenção":"tudo em dia";
+    document.getElementById("panelUpdatedAt").textContent=`Atualizado ${now.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"})}`;
+
+    const completed=completedRes.data||[];
+    const monthCounts=monthBuckets.map(bucket=>({
+      label:bucket.label,
+      count:completed.filter(t=>{
+        const d=new Date(t.completed_at);
+        return d>=bucket.start&&d<bucket.end;
+      }).length
+    }));
+    const maxCompleted=Math.max(1,...monthCounts.map(x=>x.count));
+    document.getElementById("panelCompletedChart").innerHTML=monthCounts.map(x=>{
+      const pct=Math.max(x.count?7:2,Math.round((x.count/maxCompleted)*100));
+      return `<div class="bar-group">
+        <div class="bar-number">${x.count}</div>
+        <div class="bar-column" style="height:${pct}%"></div>
+        <div class="bar-label">${esc(x.label)}</div>
+      </div>`;
+    }).join("");
+
+    const projectOrder=["planning","active","waiting","paused","completed"];
+    const projectStatusRows=projectOrder.map(key=>({key,count:projects.filter(p=>p.status===key).length})).filter(x=>x.count);
+    document.getElementById("panelProjectCountLabel").textContent=`${projects.length} projeto${projects.length===1?"":"s"}`;
+    renderExecutiveStatusBars("panelProjectStatus",projectStatusRows,Math.max(1,projects.length),"project");
+
+    const taskOrder=["todo","in_progress","waiting","review","done"];
+    const taskStatusRows=taskOrder.map(key=>({key,count:tasks.filter(t=>t.status===key).length})).filter(x=>x.count);
+    renderExecutiveStatusBars("panelTaskStatus",taskStatusRows,Math.max(1,tasks.length),"task");
+
+    const assignmentCounts={};
+    (assignmentsRes.data||[]).forEach(a=>assignmentCounts[a.user_id]=(assignmentCounts[a.user_id]||0)+1);
+    const maxLoad=Math.max(1,...members.map(m=>assignmentCounts[m.user_id]||0));
+    document.getElementById("panelTeamLoad").innerHTML=members.length?members.map(m=>{
+      const count=assignmentCounts[m.user_id]||0;
+      const pct=Math.round((count/maxLoad)*100);
+      const avatar=m.avatar_url
+        ? `<div class="team-load-avatar"><img src="${esc(m.avatar_url)}" alt=""></div>`
+        : `<div class="team-load-avatar">${esc(initials(m.full_name||"Usuário").toUpperCase())}</div>`;
+
+      return `<div class="team-load-row">
+        ${avatar}
+        <div class="team-load-main">
+          <strong>${esc(m.full_name||"Usuário")}</strong>
+          <span>${esc(roleLabel(m.role))}</span>
+          <div class="team-load-track"><i style="width:${pct}%"></i></div>
+        </div>
+        <div class="team-load-count">${count} tarefa${count===1?"":"s"}</div>
+      </div>`;
+    }).join(""):'<div class="panel-empty">Nenhum usuário ativo encontrado.</div>';
+
+    const attentionProjects=activeProjects
+      .filter(p=>p.pulse_status==="critical"||p.pulse_status==="attention"||(p.due_date&&p.due_date<todayKey))
+      .sort((a,b)=>{
+        const rank=x=>x.pulse_status==="critical"?0:x.pulse_status==="attention"?1:2;
+        return rank(a)-rank(b)||String(a.due_date||"9999").localeCompare(String(b.due_date||"9999"));
+      })
+      .slice(0,6);
+
+    document.getElementById("panelAttentionProjects").innerHTML=attentionProjects.length?attentionProjects.map(p=>{
+      const overdue=p.due_date&&p.due_date<todayKey;
+      const health=overdue||p.pulse_status==="critical"?"critical":p.pulse_status==="attention"?"attention":"";
+      const label=overdue?"Prazo vencido":p.pulse_status==="critical"?"Crítico":"Atenção";
+      return `<div class="panel-list-row">
+        <div class="panel-list-main">
+          <strong>${esc(p.name)}</strong>
+          <span>${esc(p.project_type||"Projeto")} · ${Number(p.progress||0)}% concluído</span>
+        </div>
+        <span class="health-pill ${health}">${esc(label)}</span>
+      </div>`;
+    }).join(""):'<div class="panel-empty">Nenhum projeto exige atenção especial neste momento.</div>';
+
+    const deadlines=[];
+    activeProjects.forEach(p=>{
+      if(p.due_date&&p.due_date>=todayKey){
+        deadlines.push({
+          date:new Date(`${p.due_date}T12:00:00`),
+          title:p.name,
+          detail:"Entrega de projeto",
+          kind:"Projeto"
+        });
+      }
+    });
+    openTasks.forEach(t=>{
+      if(t.due_at&&new Date(t.due_at)>=now){
+        deadlines.push({
+          date:new Date(t.due_at),
+          title:t.title,
+          detail:t.sinka_projects?.name||"Tarefa",
+          kind:"Tarefa"
+        });
+      }
+    });
+    deadlines.sort((a,b)=>a.date-b.date);
+
+    document.getElementById("panelNextDeadlines").innerHTML=deadlines.length?deadlines.slice(0,7).map(d=>`
+      <div class="panel-list-row">
+        <div class="panel-list-main">
+          <strong>${esc(d.title)}</strong>
+          <span>${esc(d.detail)}</span>
+        </div>
+        <div class="panel-value">
+          <strong>${esc(d.date.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"}))}</strong>
+          <span>${esc(d.kind)}</span>
+        </div>
+      </div>`).join(""):'<div class="panel-empty">Nenhum prazo futuro cadastrado.</div>';
+  }
+
+
   async function loadDashboard(){
     if(!ctx.workspace?.id) return;
     const wid=ctx.workspace.id;
@@ -2171,6 +2572,7 @@ const SINKA_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_...";</div>
   document.getElementById("refreshBtn").addEventListener("click",async()=>{
     toast("Atualizando dados...");
     await loadDashboard();
+    if(currentPage==="Painel")await loadExecutivePanel();
     if(currentPage==="Clientes")await loadClients();
     if(currentPage==="Projetos")await loadProjects();
     if(currentPage==="Tarefas")await loadTasks();
@@ -4180,8 +4582,9 @@ const SINKA_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_...";</div>
     currentPage=page;
     document.querySelectorAll(".nav-item").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
     document.getElementById("pageTitle").textContent=page;
-    const today=page==="Hoje",clients=page==="Clientes",projects=page==="Projetos",tasks=page==="Tarefas",calendar=page==="Calendário",team=page==="Equipe",documents=page==="Documentos",settings=page==="Configurações";
+    const today=page==="Hoje",panel=page==="Painel",clients=page==="Clientes",projects=page==="Projetos",tasks=page==="Tarefas",calendar=page==="Calendário",team=page==="Equipe",documents=page==="Documentos",settings=page==="Configurações";
     document.getElementById("todayPage").classList.toggle("hidden",!today);
+    document.getElementById("panelPage").classList.toggle("hidden",!panel);
     document.getElementById("clientsPage").classList.toggle("hidden",!clients);
     document.getElementById("projectsPage").classList.toggle("hidden",!projects);
     document.getElementById("tasksPage").classList.toggle("hidden",!tasks);
@@ -4189,7 +4592,8 @@ const SINKA_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_...";</div>
     document.getElementById("teamPage").classList.toggle("hidden",!team);
     document.getElementById("documentsPage").classList.toggle("hidden",!documents);
     document.getElementById("settingsPage").classList.toggle("hidden",!settings);
-    document.getElementById("modulePage").classList.toggle("hidden",today||clients||projects||tasks||calendar||team||documents||settings);
+    document.getElementById("modulePage").classList.toggle("hidden",today||panel||clients||projects||tasks||calendar||team||documents||settings);
+    if(panel)loadExecutivePanel();
     if(clients)loadClients();
     if(projects)Promise.all([loadClients(),loadProjects()]);
     if(tasks)loadTasks();
@@ -4197,9 +4601,9 @@ const SINKA_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_...";</div>
     if(team)loadTeamPage();
     if(documents)loadDocuments();
     if(settings)loadSettingsPage();
-    if(!today&&!clients&&!projects&&!tasks&&!calendar&&!team&&!documents&&!settings){
+    if(!today&&!panel&&!clients&&!projects&&!tasks&&!calendar&&!team&&!documents&&!settings){
       document.getElementById("moduleTitle").textContent=page;
-      const texts={"Painel":"Visão executiva do escritório, produtividade, carga da equipe e prazos.","Documentos":"Documentos e arquivos vinculados a clientes, projetos e etapas.","Relatórios":"Indicadores de produtividade, prazos, projetos e desempenho."};
+      const texts={"Documentos":"Documentos e arquivos vinculados a clientes, projetos e etapas.","Relatórios":"Indicadores de produtividade, prazos, projetos e desempenho."};
       document.getElementById("moduleDescription").textContent=texts[page]||"Módulo do Sinka.";
     }
   }
