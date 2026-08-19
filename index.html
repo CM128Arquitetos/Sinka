@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- SINKA SITE COMERCIAL — ANIMAÇÃO ZOOM NO K + FRASE DE IMPACTO -->
+<!-- SINKA SITE COMERCIAL — ANIMAÇÃO ZOOM NO K + FRASE V2 -->
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
@@ -743,17 +743,19 @@
 
     .sinka-message h2{
       margin:0;
-      max-width:920px;
+      max-width:1020px;
       font-family:Montserrat,Arial,sans-serif;
       font-size:clamp(48px,7vw,104px);
-      line-height:.92;
-      letter-spacing:-.065em;
+      line-height:1.02;
+      letter-spacing:-.055em;
       font-weight:700;
     }
 
     .sinka-message-line{
       display:block;
-      overflow:hidden;
+      overflow:visible;
+      padding-bottom:.10em;
+      padding-right:.08em;
     }
 
     .sinka-message-line > span{
@@ -790,19 +792,32 @@
       animation:sinkaUnderline .52s cubic-bezier(.2,.8,.2,1) .92s forwards;
     }
 
-    .sinka-message p{
+    .sinka-message-sub{
       margin:34px 0 0;
-      max-width:760px;
-      font-family:Montserrat,Arial,sans-serif;
-      font-size:clamp(14px,1.4vw,19px);
-      line-height:1.55;
-      letter-spacing:.01em;
-      color:rgba(255,255,255,.74);
+      max-width:820px;
+      font-family:"Nexa",Montserrat,Arial,sans-serif;
+      font-size:clamp(17px,1.7vw,24px);
+      line-height:1.34;
+      letter-spacing:.005em;
+      color:rgba(255,255,255,.82);
       opacity:0;
       transform:translateY(10px);
     }
 
-    .sinka-message.active p{
+    .sinka-message-sub span,
+    .sinka-message-sub strong{
+      display:block;
+    }
+
+    .sinka-message-sub strong{
+      margin-top:7px;
+      font-weight:700;
+      font-size:1.16em;
+      color:#fff;
+      letter-spacing:-.015em;
+    }
+
+    .sinka-message.active .sinka-message-sub{
       animation:sinkaSubIn .44s ease 1.02s forwards;
     }
 
@@ -928,9 +943,16 @@
         font-size:clamp(44px,12vw,62px);
       }
 
-      .sinka-message p{
-        margin-top:24px;
-        font-size:13px;
+      .sinka-message-sub{
+        margin-top:26px;
+        max-width:82vw;
+        font-size:15px;
+        line-height:1.35;
+      }
+
+      .sinka-message-sub strong{
+        margin-top:6px;
+        font-size:1.12em;
       }
     }
 
@@ -969,7 +991,10 @@
         <span class="sinka-message-line line-1"><span>Uma nova forma</span></span>
         <span class="sinka-message-line line-2"><span>de <span class="emphasis">gerir escritórios.</span></span></span>
       </h2>
-      <p>Projetos, equipe, agenda e documentos. Tudo em sintonia.</p>
+      <p class="sinka-message-sub">
+        <span>Projetos, equipe, agenda e documentos.</span>
+        <strong>Tudo em sintonia!</strong>
+      </p>
     </div>
 
   </div>
