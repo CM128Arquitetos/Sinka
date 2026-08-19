@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- SINKA V1.7.0 — DOCUMENTOS + SUPABASE STORAGE -->
 <!-- SINKA V1.6.2 — LIMPEZA DA EQUIPE / SAIR DO ESCRITÓRIO -->
 <!-- SINKA V1.6.1 — CONVITES POR E-MAIL -->
 <!-- SINKA V1.6.0 — EQUIPE E PERMISSÕES -->
@@ -179,6 +180,67 @@
     .event-google-row span{display:block;font-size:8px;color:#77857f;line-height:1.45;margin-top:2px}
     @media(max-width:900px){.settings-grid{grid-template-columns:1fr}}
 
+
+
+    /* ---------- DOCUMENTOS v1.7 ---------- */
+    .documents-layout{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+    .document-file-cell{display:flex;align-items:center;gap:10px;min-width:240px}
+    .document-file-icon{
+      width:38px;height:38px;flex:0 0 38px;border-radius:10px;border:1px solid #dfe8e3;
+      display:flex;align-items:center;justify-content:center;background:#f6f9f7;
+      color:#17362c;font-size:9px;font-weight:950;text-transform:uppercase
+    }
+    .document-file-icon.pdf{background:#fff3f3;color:#c7333b;border-color:#f0d2d4}
+    .document-file-icon.img{background:#eef8f3;color:#15845c}
+    .document-file-icon.cad{background:#f2f5ff;color:#4660a8;border-color:#dce2f5}
+    .document-file-icon.doc{background:#eef5ff;color:#2f67ae;border-color:#dbe7f7}
+    .document-file-icon.xls{background:#eef8f1;color:#2d8155;border-color:#d9eadf}
+    .document-file-icon.zip{background:#fff8ec;color:#9b6a1f;border-color:#efdfc1}
+    .document-file-icon.other{background:#f5f5f5;color:#68746e}
+    .document-file-main{min-width:0}
+    .document-file-main strong{display:block;font-size:10px;color:#18352b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:360px}
+    .document-file-main span{display:block;margin-top:3px;font-size:8px;color:#7d8983;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:360px}
+    .document-category{
+      display:inline-flex;align-items:center;min-height:24px;padding:0 8px;border-radius:999px;
+      background:#f2f7f4;color:#486458;border:1px solid #dfe9e4;font-size:8px;font-weight:850
+    }
+    .document-link-cell strong{display:block;font-size:9px;color:#273c33}
+    .document-link-cell span{display:block;font-size:8px;color:#83908a;margin-top:3px}
+    .document-uploader strong{display:block;font-size:9px}
+    .document-uploader span{display:block;font-size:8px;color:#87928d;margin-top:3px}
+    .upload-drop{
+      border:1.5px dashed #bfd0c7;border-radius:14px;background:#f8fbf9;
+      padding:22px;text-align:center;cursor:pointer;transition:.15s ease
+    }
+    .upload-drop:hover,.upload-drop.drag{border-color:#0c7657;background:#f1f8f5}
+    .upload-drop strong{display:block;font-size:11px;color:#17362c}
+    .upload-drop span{display:block;margin-top:6px;font-size:8px;line-height:1.5;color:#7a8881}
+    .upload-drop .upload-mark{
+      width:42px;height:42px;border-radius:12px;margin:0 auto 10px;background:#e7f3ed;
+      display:flex;align-items:center;justify-content:center;font-weight:950;color:#0d7858;font-size:18px
+    }
+    .selected-file{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:9px;
+      padding:10px 12px;border:1px solid #dfe8e3;border-radius:10px;background:#fff
+    }
+    .selected-file strong{display:block;font-size:9px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .selected-file span{display:block;font-size:8px;color:#84918b;margin-top:3px}
+    .document-note{
+      padding:10px 12px;border:1px solid #dce8e2;background:#f7faf8;border-radius:10px;
+      color:#66766e;font-size:8px;line-height:1.55;margin-top:12px
+    }
+    .document-edit-file{
+      padding:11px 12px;border-radius:10px;background:#f6f8f7;border:1px solid #e1e7e4;
+      font-size:9px;color:#627068;margin-bottom:12px
+    }
+    .documents-permission{
+      display:flex;align-items:center;gap:7px;margin-bottom:10px;padding:9px 11px;border-radius:10px;
+      border:1px solid #dce7e2;background:#f8fbfa;color:#62736a;font-size:8px
+    }
+    .doc-actions{display:flex;justify-content:flex-end;gap:5px;flex-wrap:wrap}
+    @media(max-width:900px){
+      .document-file-main strong,.document-file-main span{max-width:220px}
+    }
 
     /* ---------- EQUIPE + PERMISSÕES v1.6 ---------- */
     .permissions-section{
@@ -1140,6 +1202,66 @@ const SINKA_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_...";</div>
       </section>
 
 
+
+      <section id="documentsPage" class="module-view hidden">
+        <div class="data-summary">
+          <div class="summary-chip"><span>ARQUIVOS CADASTRADOS</span><strong id="documentsTotal">0</strong></div>
+          <div class="summary-chip"><span>PROJETOS COM ARQUIVOS</span><strong id="documentsProjects">0</strong></div>
+          <div class="summary-chip"><span>ESPAÇO UTILIZADO</span><strong id="documentsSize">0 B</strong></div>
+        </div>
+
+        <div class="documents-permission" id="documentsPermission">
+          Os arquivos ficam em uma área privada do escritório. Usuários do escritório podem consultar e baixar; Gestores, Administradores e Sócios/Proprietários podem enviar, editar e excluir.
+        </div>
+
+        <div class="page-toolbar">
+          <div class="page-toolbar-left">
+            <input class="filter-input" id="documentSearch" placeholder="Pesquisar arquivo, projeto, cliente...">
+            <select class="filter-select" id="documentCategoryFilter">
+              <option value="">Todas as categorias</option>
+              <option value="contracts">Contratos</option>
+              <option value="projects">Projetos</option>
+              <option value="approvals">Aprovações</option>
+              <option value="client_docs">Documentos do cliente</option>
+              <option value="budgets">Orçamentos</option>
+              <option value="surveys">Levantamentos</option>
+              <option value="images">Imagens</option>
+              <option value="reports">Relatórios</option>
+              <option value="spreadsheets">Planilhas</option>
+              <option value="presentations">Apresentações</option>
+              <option value="other">Outros</option>
+            </select>
+            <select class="filter-select" id="documentClientFilter"><option value="">Todos os clientes</option></select>
+            <select class="filter-select" id="documentProjectFilter"><option value="">Todos os projetos</option></select>
+          </div>
+          <button class="page-action" id="addDocumentBtn">+ Enviar arquivo</button>
+        </div>
+
+        <div class="data-card">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Arquivo</th>
+                  <th>Categoria</th>
+                  <th>Cliente / Projeto</th>
+                  <th>Enviado por</th>
+                  <th>Data</th>
+                  <th>Tamanho</th>
+                  <th style="text-align:right">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="documentsTableBody"></tbody>
+            </table>
+          </div>
+          <div id="documentsEmpty" class="empty-data hidden">
+            <strong>Nenhum arquivo encontrado</strong>
+            <span>Envie documentos do escritório e vincule-os a clientes e projetos.</span>
+          </div>
+        </div>
+      </section>
+
+
       <section id="settingsPage" class="module-view hidden">
         <div class="settings-grid">
           <section class="settings-card">
@@ -1195,7 +1317,7 @@ const SINKA_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_...";</div>
               <div class="settings-info-row"><span>Nome</span><strong id="settingsWorkspaceName">—</strong></div>
               <div class="settings-info-row"><span>Seu acesso</span><strong id="settingsWorkspaceRole">—</strong></div>
               <div class="settings-info-row"><span>Usuários ativos</span><strong id="settingsWorkspaceMembers">—</strong></div>
-              <div class="settings-info-row"><span>Versão do sistema</span><strong>1.6.2</strong></div>
+              <div class="settings-info-row"><span>Versão do sistema</span><strong>1.7.0</strong></div>
             </div>
             <div class="sync-callout">
               Planos, cobrança e licença do escritório serão adicionados nesta mesma área em uma etapa futura.
@@ -1214,6 +1336,89 @@ const SINKA_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_...";</div>
 </section>
 
 <div class="toast-wrap" id="toastWrap"></div>
+
+
+
+<div class="modal-backdrop hidden" id="documentModal">
+  <div class="modal large">
+    <div class="modal-head-row">
+      <div>
+        <h3 id="documentModalTitle">Enviar arquivo</h3>
+        <p>Organize documentos por cliente, projeto, etapa e categoria.</p>
+      </div>
+      <button class="modal-close" type="button" data-close-modal="documentModal">×</button>
+    </div>
+
+    <form id="documentForm">
+      <input type="hidden" id="documentId">
+
+      <div id="documentUploadArea">
+        <input id="documentFile" type="file" class="hidden">
+        <div class="upload-drop" id="documentDropZone" tabindex="0">
+          <div class="upload-mark">↑</div>
+          <strong id="documentDropTitle">Clique ou arraste um arquivo aqui</strong>
+          <span>PDF, imagens, DWG/DXF, DOCX, XLSX, ZIP, SKP, RVT, IFC e outros formatos.</span>
+        </div>
+        <div id="documentSelectedFile" class="selected-file hidden"></div>
+      </div>
+
+      <div id="documentExistingFile" class="document-edit-file hidden"></div>
+
+      <div class="form-grid" style="margin-top:14px">
+        <div class="field full">
+          <label>Título do documento *</label>
+          <input id="documentTitle" required placeholder="Ex.: Projeto executivo - Revisão 03">
+        </div>
+
+        <div class="field">
+          <label>Categoria</label>
+          <select id="documentCategory">
+            <option value="projects">Projetos</option>
+            <option value="contracts">Contratos</option>
+            <option value="approvals">Aprovações</option>
+            <option value="client_docs">Documentos do cliente</option>
+            <option value="budgets">Orçamentos</option>
+            <option value="surveys">Levantamentos</option>
+            <option value="images">Imagens</option>
+            <option value="reports">Relatórios</option>
+            <option value="spreadsheets">Planilhas</option>
+            <option value="presentations">Apresentações</option>
+            <option value="other">Outros</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Cliente</label>
+          <select id="documentClient"><option value="">Sem cliente vinculado</option></select>
+        </div>
+
+        <div class="field">
+          <label>Projeto</label>
+          <select id="documentProject"><option value="">Sem projeto vinculado</option></select>
+        </div>
+
+        <div class="field">
+          <label>Etapa do projeto</label>
+          <select id="documentStage"><option value="">Sem etapa vinculada</option></select>
+        </div>
+
+        <div class="field full">
+          <label>Descrição / observações</label>
+          <textarea id="documentDescription" placeholder="Revisão, conteúdo, observações importantes..."></textarea>
+        </div>
+      </div>
+
+      <div class="document-note">
+        O arquivo é armazenado em área privada do escritório. Para substituir um arquivo por uma nova revisão, recomendamos enviar um novo documento e manter o histórico da versão anterior.
+      </div>
+
+      <div class="modal-actions">
+        <button class="secondary" type="button" data-close-modal="documentModal">Cancelar</button>
+        <button class="danger-btn" id="saveDocumentBtn" type="submit">Enviar arquivo</button>
+      </div>
+    </form>
+  </div>
+</div>
 
 
 <div class="modal-backdrop hidden" id="clientModal">
@@ -1703,7 +1908,7 @@ const SINKA_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_...";</div>
 
   function applyRolePermissions(){
     const operator=canOperate();
-    ["addClientBtn","addProjectBtn","addTaskBtn","stageTemplateBtn","newStageBtn"].forEach(id=>{
+    ["addClientBtn","addProjectBtn","addTaskBtn","stageTemplateBtn","newStageBtn","addDocumentBtn"].forEach(id=>{
       const el=document.getElementById(id);
       if(el) el.classList.toggle("hidden",!operator);
     });
@@ -2635,6 +2840,8 @@ const SINKA_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_...";</div>
   let clientsCache = [];
   let projectsCache = [];
   let tasksCache = [];
+  let documentsCache = [];
+  let selectedDocumentFile = null;
   let membersCache = [];
   let taskAssigneesMap = {};
   let taskChecklistMap = {};
@@ -2647,6 +2854,499 @@ const SINKA_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_...";</div>
 
   function onlyDateBR(value){ if(!value) return "—"; const [y,m,d]=String(value).slice(0,10).split("-"); return y&&m&&d?`${d}/${m}/${y}`:value; }
   function statusLabel(status){ return {planning:"Planejamento",active:"Em andamento",waiting:"Aguardando",paused:"Pausado",completed:"Concluído",archived:"Arquivado"}[status]||status||"—"; }
+
+
+  const DOCUMENT_BUCKET="sinka-documents";
+
+  function documentCategoryLabel(value){
+    return {
+      contracts:"Contratos",
+      projects:"Projetos",
+      approvals:"Aprovações",
+      client_docs:"Documentos do cliente",
+      budgets:"Orçamentos",
+      surveys:"Levantamentos",
+      images:"Imagens",
+      reports:"Relatórios",
+      spreadsheets:"Planilhas",
+      presentations:"Apresentações",
+      other:"Outros"
+    }[value]||value||"Outros";
+  }
+
+  function formatFileSize(bytes){
+    const n=Number(bytes||0);
+    if(!Number.isFinite(n)||n<=0)return "0 B";
+    const units=["B","KB","MB","GB","TB"];
+    const i=Math.min(units.length-1,Math.floor(Math.log(n)/Math.log(1024)));
+    const value=n/Math.pow(1024,i);
+    return `${value>=10||i===0?value.toFixed(0):value.toFixed(1)} ${units[i]}`;
+  }
+
+  function documentExtension(name){
+    const clean=String(name||"");
+    const idx=clean.lastIndexOf(".");
+    return idx>0?clean.slice(idx+1).toLowerCase():"";
+  }
+
+  function documentIconClass(doc){
+    const ext=String(doc.file_extension||documentExtension(doc.original_name)).toLowerCase();
+    const mime=String(doc.mime_type||"").toLowerCase();
+    if(ext==="pdf")return ["PDF","pdf"];
+    if(["jpg","jpeg","png","webp","gif","heic","svg"].includes(ext)||mime.startsWith("image/"))return ["IMG","img"];
+    if(["dwg","dxf","ifc","rvt","skp"].includes(ext))return [ext.toUpperCase(),"cad"];
+    if(["doc","docx","rtf","txt"].includes(ext))return [ext.toUpperCase()||"DOC","doc"];
+    if(["xls","xlsx","csv"].includes(ext))return [ext.toUpperCase()||"XLS","xls"];
+    if(["zip","rar","7z"].includes(ext))return [ext.toUpperCase(),"zip"];
+    if(["ppt","pptx"].includes(ext))return [ext.toUpperCase(),"doc"];
+    return [ext?ext.slice(0,4).toUpperCase():"FILE","other"];
+  }
+
+  function safeDocumentStorageName(name){
+    const ext=documentExtension(name);
+    const base=String(name||"arquivo")
+      .replace(/\.[^.]+$/,"")
+      .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+      .replace(/[^a-zA-Z0-9_-]+/g,"-")
+      .replace(/-+/g,"-")
+      .replace(/^-|-$/g,"")
+      .slice(0,90)||"arquivo";
+    return ext?`${base}.${ext}`:base;
+  }
+
+  function refreshDocumentFilterOptions(){
+    const clientFilter=document.getElementById("documentClientFilter");
+    const projectFilter=document.getElementById("documentProjectFilter");
+    const clientSelect=document.getElementById("documentClient");
+
+    if(clientFilter){
+      const current=clientFilter.value;
+      clientFilter.innerHTML='<option value="">Todos os clientes</option>'+clientsCache.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join("");
+      if([...clientFilter.options].some(o=>o.value===current))clientFilter.value=current;
+    }
+
+    if(projectFilter){
+      const current=projectFilter.value;
+      projectFilter.innerHTML='<option value="">Todos os projetos</option>'+projectsCache.map(p=>`<option value="${p.id}">${esc(p.code?`${p.code} — ${p.name}`:p.name)}</option>`).join("");
+      if([...projectFilter.options].some(o=>o.value===current))projectFilter.value=current;
+    }
+
+    if(clientSelect){
+      const current=clientSelect.value;
+      clientSelect.innerHTML='<option value="">Sem cliente vinculado</option>'+clientsCache.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join("");
+      if([...clientSelect.options].some(o=>o.value===current))clientSelect.value=current;
+    }
+
+    refreshDocumentProjectOptions(document.getElementById("documentProject")?.value||"");
+  }
+
+  function refreshDocumentProjectOptions(selected=""){
+    const select=document.getElementById("documentProject");
+    if(!select)return;
+    const clientId=document.getElementById("documentClient")?.value||"";
+    const rows=clientId
+      ? projectsCache.filter(p=>p.client_id===clientId)
+      : projectsCache;
+
+    select.innerHTML='<option value="">Sem projeto vinculado</option>'+rows.map(p=>`<option value="${p.id}">${esc(p.code?`${p.code} — ${p.name}`:p.name)}</option>`).join("");
+    if(selected&&[...select.options].some(o=>o.value===selected))select.value=selected;
+  }
+
+  async function loadDocumentStages(projectId,selected=""){
+    const select=document.getElementById("documentStage");
+    if(!select)return;
+    select.innerHTML='<option value="">Sem etapa vinculada</option>';
+    if(!projectId)return;
+
+    const {data,error}=await sb.from("sinka_project_stages")
+      .select("id,name,position")
+      .eq("workspace_id",ctx.workspace.id)
+      .eq("project_id",projectId)
+      .order("position",{ascending:true});
+
+    if(error){
+      console.warn("Não foi possível carregar etapas do documento:",error);
+      return;
+    }
+
+    select.innerHTML='<option value="">Sem etapa vinculada</option>'+(data||[]).map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join("");
+    if(selected&&[...select.options].some(o=>o.value===selected))select.value=selected;
+  }
+
+  async function loadDocuments(){
+    if(!ctx.workspace?.id)return;
+
+    if(!clientsCache.length)await loadClients();
+    if(!projectsCache.length)await loadProjects();
+
+    const {data,error}=await sb.from("sinka_documents")
+      .select("id,workspace_id,client_id,project_id,stage_id,title,description,category,original_name,storage_bucket,storage_path,mime_type,file_extension,file_size,uploaded_by,uploaded_by_name,uploaded_by_email,created_at,updated_at,sinka_clients(name),sinka_projects(name,code),sinka_project_stages(name)")
+      .eq("workspace_id",ctx.workspace.id)
+      .order("created_at",{ascending:false});
+
+    if(error){
+      console.error(error);
+      toast("Não foi possível carregar os documentos.","error");
+      return;
+    }
+
+    documentsCache=data||[];
+    refreshDocumentFilterOptions();
+    renderDocuments();
+    applyRolePermissions();
+  }
+
+  function renderDocuments(){
+    const q=(document.getElementById("documentSearch")?.value||"").trim().toLowerCase();
+    const category=document.getElementById("documentCategoryFilter")?.value||"";
+    const clientId=document.getElementById("documentClientFilter")?.value||"";
+    const projectId=document.getElementById("documentProjectFilter")?.value||"";
+
+    const rows=documentsCache.filter(d=>{
+      const hay=[
+        d.title,d.original_name,d.description,
+        d.sinka_clients?.name,d.sinka_projects?.name,d.sinka_projects?.code,
+        d.sinka_project_stages?.name,d.uploaded_by_name,d.uploaded_by_email,
+        documentCategoryLabel(d.category)
+      ].filter(Boolean).join(" ").toLowerCase();
+
+      return (!q||hay.includes(q))
+        &&(!category||d.category===category)
+        &&(!clientId||d.client_id===clientId)
+        &&(!projectId||d.project_id===projectId);
+    });
+
+    document.getElementById("documentsTotal").textContent=documentsCache.length;
+    document.getElementById("documentsProjects").textContent=new Set(documentsCache.filter(d=>d.project_id).map(d=>d.project_id)).size;
+    document.getElementById("documentsSize").textContent=formatFileSize(documentsCache.reduce((sum,d)=>sum+Number(d.file_size||0),0));
+
+    const body=document.getElementById("documentsTableBody");
+    const empty=document.getElementById("documentsEmpty");
+    body.innerHTML="";
+
+    if(!rows.length){
+      empty.classList.remove("hidden");
+      return;
+    }
+    empty.classList.add("hidden");
+
+    body.innerHTML=rows.map(d=>{
+      const [icon,iconClass]=documentIconClass(d);
+      const project=d.sinka_projects?.name||"Sem projeto";
+      const client=d.sinka_clients?.name||"Sem cliente";
+      const stage=d.sinka_project_stages?.name||"";
+      const uploader=d.uploaded_by_name||d.uploaded_by_email||"Usuário";
+      const canEdit=canOperate();
+
+      return `<tr>
+        <td>
+          <div class="document-file-cell">
+            <div class="document-file-icon ${iconClass}">${esc(icon)}</div>
+            <div class="document-file-main">
+              <strong>${esc(d.title||d.original_name)}</strong>
+              <span>${esc(d.original_name||"Arquivo")}${d.description?` · ${esc(d.description)}`:""}</span>
+            </div>
+          </div>
+        </td>
+        <td><span class="document-category">${esc(documentCategoryLabel(d.category))}</span></td>
+        <td>
+          <div class="document-link-cell">
+            <strong>${esc(project)}</strong>
+            <span>${esc(client)}${stage?` · ${esc(stage)}`:""}</span>
+          </div>
+        </td>
+        <td>
+          <div class="document-uploader">
+            <strong>${esc(uploader)}</strong>
+            <span>${esc(d.uploaded_by_email||"")}</span>
+          </div>
+        </td>
+        <td>${esc(new Date(d.created_at).toLocaleDateString("pt-BR"))}</td>
+        <td>${esc(formatFileSize(d.file_size))}</td>
+        <td>
+          <div class="doc-actions">
+            <button class="table-btn" data-open-document="${d.id}">Abrir</button>
+            <button class="table-btn" data-download-document="${d.id}">Baixar</button>
+            ${canEdit?`<button class="table-btn" data-edit-document="${d.id}">Editar</button><button class="table-btn delete" data-delete-document="${d.id}">Excluir</button>`:""}
+          </div>
+        </td>
+      </tr>`;
+    }).join("");
+  }
+
+  function showSelectedDocumentFile(file){
+    const box=document.getElementById("documentSelectedFile");
+    if(!file){
+      box.classList.add("hidden");
+      box.innerHTML="";
+      return;
+    }
+    const ext=documentExtension(file.name);
+    box.innerHTML=`<div style="min-width:0"><strong>${esc(file.name)}</strong><span>${esc(ext?ext.toUpperCase():"Arquivo")} · ${esc(formatFileSize(file.size))}</span></div><button class="table-btn" id="clearDocumentFileBtn" type="button">Trocar</button>`;
+    box.classList.remove("hidden");
+    document.getElementById("clearDocumentFileBtn").addEventListener("click",()=>{
+      selectedDocumentFile=null;
+      document.getElementById("documentFile").value="";
+      showSelectedDocumentFile(null);
+    });
+  }
+
+  async function resetDocumentForm(){
+    document.getElementById("documentForm").reset();
+    document.getElementById("documentId").value="";
+    document.getElementById("documentCategory").value="projects";
+    document.getElementById("documentModalTitle").textContent="Enviar arquivo";
+    document.getElementById("saveDocumentBtn").textContent="Enviar arquivo";
+    document.getElementById("documentUploadArea").classList.remove("hidden");
+    document.getElementById("documentExistingFile").classList.add("hidden");
+    selectedDocumentFile=null;
+    showSelectedDocumentFile(null);
+    refreshDocumentFilterOptions();
+    refreshDocumentProjectOptions();
+    await loadDocumentStages("");
+  }
+
+  async function editDocument(id){
+    if(!canOperate())return toast("Seu perfil possui acesso somente de leitura aos documentos.","error");
+    const d=documentsCache.find(x=>x.id===id);
+    if(!d)return;
+
+    document.getElementById("documentForm").reset();
+    document.getElementById("documentId").value=d.id;
+    document.getElementById("documentTitle").value=d.title||"";
+    document.getElementById("documentDescription").value=d.description||"";
+    document.getElementById("documentCategory").value=d.category||"other";
+    document.getElementById("documentClient").value=d.client_id||"";
+    refreshDocumentProjectOptions(d.project_id||"");
+    document.getElementById("documentProject").value=d.project_id||"";
+    await loadDocumentStages(d.project_id||"",d.stage_id||"");
+
+    document.getElementById("documentUploadArea").classList.add("hidden");
+    const existing=document.getElementById("documentExistingFile");
+    existing.innerHTML=`Arquivo armazenado: <strong>${esc(d.original_name)}</strong> · ${esc(formatFileSize(d.file_size))}. Nesta tela você edita apenas a organização e as informações do documento.`;
+    existing.classList.remove("hidden");
+    document.getElementById("documentModalTitle").textContent="Editar documento";
+    document.getElementById("saveDocumentBtn").textContent="Salvar alterações";
+    selectedDocumentFile=null;
+    openModal("documentModal");
+  }
+
+  async function openStoredDocument(id){
+    const d=documentsCache.find(x=>x.id===id);
+    if(!d)return;
+
+    const popup=window.open("about:blank","_blank");
+    const {data,error}=await sb.storage.from(d.storage_bucket||DOCUMENT_BUCKET)
+      .createSignedUrl(d.storage_path,120);
+
+    if(error||!data?.signedUrl){
+      if(popup)popup.close();
+      return toast(error?.message||"Não foi possível abrir o arquivo.","error");
+    }
+
+    if(popup)popup.location.href=data.signedUrl;
+    else window.location.href=data.signedUrl;
+  }
+
+  async function downloadStoredDocument(id){
+    const d=documentsCache.find(x=>x.id===id);
+    if(!d)return;
+
+    toast("Preparando download...");
+    const {data,error}=await sb.storage.from(d.storage_bucket||DOCUMENT_BUCKET).download(d.storage_path);
+    if(error||!data)return toast(error?.message||"Não foi possível baixar o arquivo.","error");
+
+    const url=URL.createObjectURL(data);
+    const a=document.createElement("a");
+    a.href=url;
+    a.download=d.original_name||d.title||"documento";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),5000);
+  }
+
+  async function deleteStoredDocument(id){
+    if(!canOperate())return toast("Você não possui permissão para excluir documentos.","error");
+    const d=documentsCache.find(x=>x.id===id);
+    if(!d)return;
+
+    if(!confirm(`Excluir "${d.title||d.original_name}"? O arquivo será removido definitivamente do armazenamento do escritório.`))return;
+
+    const storageResult=await sb.storage.from(d.storage_bucket||DOCUMENT_BUCKET).remove([d.storage_path]);
+    if(storageResult.error){
+      return toast(storageResult.error.message||"Não foi possível remover o arquivo do armazenamento.","error");
+    }
+
+    const {error}=await sb.from("sinka_documents")
+      .delete()
+      .eq("id",id)
+      .eq("workspace_id",ctx.workspace.id);
+
+    if(error){
+      toast("O arquivo foi removido, mas não foi possível apagar o registro. Atualize a página e tente novamente.","error");
+      return;
+    }
+
+    toast("Documento excluído.");
+    await loadDocuments();
+  }
+
+  document.getElementById("documentFile").addEventListener("change",e=>{
+    selectedDocumentFile=e.target.files?.[0]||null;
+    showSelectedDocumentFile(selectedDocumentFile);
+    if(selectedDocumentFile&&!document.getElementById("documentTitle").value.trim()){
+      document.getElementById("documentTitle").value=selectedDocumentFile.name.replace(/\.[^.]+$/,"");
+    }
+  });
+
+  const documentDropZone=document.getElementById("documentDropZone");
+  documentDropZone.addEventListener("click",()=>document.getElementById("documentFile").click());
+  documentDropZone.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();document.getElementById("documentFile").click();}});
+  ["dragenter","dragover"].forEach(type=>documentDropZone.addEventListener(type,e=>{e.preventDefault();documentDropZone.classList.add("drag");}));
+  ["dragleave","drop"].forEach(type=>documentDropZone.addEventListener(type,e=>{e.preventDefault();documentDropZone.classList.remove("drag");}));
+  documentDropZone.addEventListener("drop",e=>{
+    const file=e.dataTransfer?.files?.[0];
+    if(!file)return;
+    selectedDocumentFile=file;
+    showSelectedDocumentFile(file);
+    if(!document.getElementById("documentTitle").value.trim()){
+      document.getElementById("documentTitle").value=file.name.replace(/\.[^.]+$/,"");
+    }
+  });
+
+  document.getElementById("documentClient").addEventListener("change",async()=>{
+    refreshDocumentProjectOptions();
+    await loadDocumentStages("");
+  });
+
+  document.getElementById("documentProject").addEventListener("change",async e=>{
+    const projectId=e.target.value;
+    const project=projectsCache.find(p=>p.id===projectId);
+    if(project?.client_id){
+      document.getElementById("documentClient").value=project.client_id;
+      refreshDocumentProjectOptions(projectId);
+      document.getElementById("documentProject").value=projectId;
+    }
+    await loadDocumentStages(projectId);
+  });
+
+  document.getElementById("documentForm").addEventListener("submit",async e=>{
+    e.preventDefault();
+    if(!canOperate())return toast("Você não possui permissão para enviar ou editar documentos.","error");
+
+    const id=document.getElementById("documentId").value;
+    const title=document.getElementById("documentTitle").value.trim();
+    if(!title)return toast("Informe o título do documento.","error");
+
+    const payload={
+      workspace_id:ctx.workspace.id,
+      client_id:document.getElementById("documentClient").value||null,
+      project_id:document.getElementById("documentProject").value||null,
+      stage_id:document.getElementById("documentStage").value||null,
+      title,
+      category:document.getElementById("documentCategory").value||"other",
+      description:document.getElementById("documentDescription").value.trim()||null
+    };
+
+    const btn=document.getElementById("saveDocumentBtn");
+    btn.disabled=true;
+
+    if(id){
+      btn.textContent="Salvando...";
+      const {error}=await sb.from("sinka_documents")
+        .update(payload)
+        .eq("id",id)
+        .eq("workspace_id",ctx.workspace.id);
+
+      btn.disabled=false;
+      btn.textContent="Salvar alterações";
+
+      if(error)return toast(error.message||"Não foi possível atualizar o documento.","error");
+
+      closeModal("documentModal");
+      toast("Documento atualizado.");
+      await loadDocuments();
+      return;
+    }
+
+    if(!selectedDocumentFile){
+      btn.disabled=false;
+      btn.textContent="Enviar arquivo";
+      return toast("Selecione um arquivo para enviar.","error");
+    }
+
+    btn.textContent="Enviando...";
+
+    const file=selectedDocumentFile;
+    const safeName=safeDocumentStorageName(file.name);
+    const folder=payload.project_id||"geral";
+    const storagePath=`${ctx.workspace.id}/${folder}/${crypto.randomUUID()}-${safeName}`;
+
+    const upload=await sb.storage.from(DOCUMENT_BUCKET).upload(storagePath,file,{
+      cacheControl:"3600",
+      upsert:false,
+      contentType:file.type||undefined
+    });
+
+    if(upload.error){
+      btn.disabled=false;
+      btn.textContent="Enviar arquivo";
+      return toast(upload.error.message||"Não foi possível enviar o arquivo.","error");
+    }
+
+    const documentRecord={
+      ...payload,
+      original_name:file.name,
+      storage_bucket:DOCUMENT_BUCKET,
+      storage_path:storagePath,
+      mime_type:file.type||null,
+      file_extension:documentExtension(file.name)||null,
+      file_size:file.size||0,
+      uploaded_by:ctx.user.id,
+      uploaded_by_name:ctx.profile?.full_name||ctx.user?.user_metadata?.full_name||ctx.user?.email?.split("@")[0]||"Usuário",
+      uploaded_by_email:ctx.user?.email||null
+    };
+
+    const {error}=await sb.from("sinka_documents").insert(documentRecord);
+
+    if(error){
+      await sb.storage.from(DOCUMENT_BUCKET).remove([storagePath]);
+      btn.disabled=false;
+      btn.textContent="Enviar arquivo";
+      return toast(error.message||"O arquivo foi enviado, mas não foi possível cadastrá-lo.","error");
+    }
+
+    btn.disabled=false;
+    btn.textContent="Enviar arquivo";
+    closeModal("documentModal");
+    await resetDocumentForm();
+    toast("Documento enviado.");
+    await loadDocuments();
+  });
+
+  ["documentSearch","documentCategoryFilter","documentClientFilter","documentProjectFilter"].forEach(id=>{
+    document.getElementById(id).addEventListener(id==="documentSearch"?"input":"change",renderDocuments);
+  });
+
+  document.getElementById("addDocumentBtn").addEventListener("click",async()=>{
+    if(!canOperate())return toast("Seu perfil possui acesso somente de leitura aos documentos.","error");
+    await resetDocumentForm();
+    openModal("documentModal");
+  });
+
+  document.getElementById("documentsTableBody").addEventListener("click",e=>{
+    const open=e.target.closest("[data-open-document]");
+    const download=e.target.closest("[data-download-document]");
+    const edit=e.target.closest("[data-edit-document]");
+    const del=e.target.closest("[data-delete-document]");
+
+    if(open)return openStoredDocument(open.dataset.openDocument);
+    if(download)return downloadStoredDocument(download.dataset.downloadDocument);
+    if(edit)return editDocument(edit.dataset.editDocument);
+    if(del)return deleteStoredDocument(del.dataset.deleteDocument);
+  });
+
 
   async function loadClients(){
     if(!ctx.workspace?.id) return;
@@ -3472,29 +4172,32 @@ const SINKA_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_...";</div>
     if(currentPage==="Projetos"){if(!clientsCache.length)await loadClients();resetProjectForm();return openModal("projectModal");}
     if(currentPage==="Tarefas"){await resetTaskForm();return openModal("taskModal");}
     if(currentPage==="Calendário"){await resetEventForm();return openModal("eventModal");}
-    toast("Use + Novo em Clientes, Projetos, Tarefas ou Calendário.");
+    if(currentPage==="Documentos"){if(!canOperate())return toast("Seu perfil possui acesso somente de leitura aos documentos.","error");await resetDocumentForm();return openModal("documentModal");}
+    toast("Use + Novo nos módulos disponíveis.");
   });
 
   function openPage(page){
     currentPage=page;
     document.querySelectorAll(".nav-item").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
     document.getElementById("pageTitle").textContent=page;
-    const today=page==="Hoje",clients=page==="Clientes",projects=page==="Projetos",tasks=page==="Tarefas",calendar=page==="Calendário",team=page==="Equipe",settings=page==="Configurações";
+    const today=page==="Hoje",clients=page==="Clientes",projects=page==="Projetos",tasks=page==="Tarefas",calendar=page==="Calendário",team=page==="Equipe",documents=page==="Documentos",settings=page==="Configurações";
     document.getElementById("todayPage").classList.toggle("hidden",!today);
     document.getElementById("clientsPage").classList.toggle("hidden",!clients);
     document.getElementById("projectsPage").classList.toggle("hidden",!projects);
     document.getElementById("tasksPage").classList.toggle("hidden",!tasks);
     document.getElementById("calendarPage").classList.toggle("hidden",!calendar);
     document.getElementById("teamPage").classList.toggle("hidden",!team);
+    document.getElementById("documentsPage").classList.toggle("hidden",!documents);
     document.getElementById("settingsPage").classList.toggle("hidden",!settings);
-    document.getElementById("modulePage").classList.toggle("hidden",today||clients||projects||tasks||calendar||team||settings);
+    document.getElementById("modulePage").classList.toggle("hidden",today||clients||projects||tasks||calendar||team||documents||settings);
     if(clients)loadClients();
     if(projects)Promise.all([loadClients(),loadProjects()]);
     if(tasks)loadTasks();
     if(calendar)Promise.all([loadProjects(),loadGoogleCalendarStatus(),loadCalendar()]);
     if(team)loadTeamPage();
+    if(documents)loadDocuments();
     if(settings)loadSettingsPage();
-    if(!today&&!clients&&!projects&&!tasks&&!calendar&&!team&&!settings){
+    if(!today&&!clients&&!projects&&!tasks&&!calendar&&!team&&!documents&&!settings){
       document.getElementById("moduleTitle").textContent=page;
       const texts={"Painel":"Visão executiva do escritório, produtividade, carga da equipe e prazos.","Documentos":"Documentos e arquivos vinculados a clientes, projetos e etapas.","Relatórios":"Indicadores de produtividade, prazos, projetos e desempenho."};
       document.getElementById("moduleDescription").textContent=texts[page]||"Módulo do Sinka.";
