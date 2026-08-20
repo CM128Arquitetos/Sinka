@@ -2848,6 +2848,25 @@
         animation:none!important;
       }
     }
+
+    .support-form-error{
+      display:none;
+      margin:10px 2px 0;
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(214,23,26,.10);
+      border:1px solid rgba(214,23,26,.18);
+      color:#ffd6d7;
+      font-size:10.5px;
+      line-height:1.5;
+    }
+    .support-form-error.show{display:block}
+    .support-submit[disabled]{
+      opacity:.72;
+      cursor:wait;
+      transform:none!important;
+      box-shadow:none;
+    }
 </style>
 </head>
 <body class="sinka-intro-running">
@@ -3100,7 +3119,6 @@
         Um sistema criado para fazer <strong>equipe, agenda, projetos, tarefas e documentos</strong>
         trabalharem no mesmo ritmo — com menos desencontro e mais clareza.
       </p>
-
 <div class="brand-clean-flow brand-clean-flow-after-k">
 <span>Conectar</span>
 <i>→</i>
@@ -3109,7 +3127,6 @@
 <span>Sincronizar</span>
 </div>
 </div>
-
 <div class="brand-premium-visual reveal">
 <div class="brand-premium-top">
 <div>
@@ -3155,7 +3172,6 @@
 </div>
 </div>
 </div>
-
 </div>
 </section>
 <section class="features-premium" id="recursos">
@@ -3450,7 +3466,6 @@ const topbar = document.getElementById("topbar");
 </button>
 <aside aria-labelledby="sinkaSupportTitle" aria-modal="false" class="sinka-support-panel" id="sinkaSupportPanel" role="dialog">
 <div class="support-panel-head">
-
 <h3 id="sinkaSupportTitle">Como podemos ajudar?</h3>
 <p>Escolha uma opção e conte pra gente o que você precisa.</p>
 <button aria-label="Fechar" class="support-close" id="sinkaSupportClose" type="button">×</button>
@@ -3515,108 +3530,192 @@ const topbar = document.getElementById("topbar");
 <textarea id="supportMessage" name="mensagem" placeholder="Descreva sua dúvida ou solicitação..." required=""></textarea>
 </div>
 <button class="support-submit" type="submit">Enviar mensagem →</button>
-</form>
+<input aria-hidden="true" autocomplete="off" id="supportWebsite" name="website" style="position:absolute;left:-9999px;opacity:0;pointer-events:none" tabindex="-1" type="text"/></form><p class="support-form-error" id="supportFormError" role="alert"></p>
 </div>
 <div class="support-view" id="supportSuccess">
 <div class="support-success">
 <div class="support-success-icon">✓</div>
-<h4>Mensagem preparada.</h4>
-<p>Seu aplicativo de e-mail foi aberto com os dados preenchidos. Basta confirmar o envio.</p>
+<h4>Mensagem enviada.</h4>
+<p>Recebemos sua mensagem. A equipe do Sinka poderá responder pelo e-mail informado.</p>
 <button id="supportNewMessage" type="button">Nova mensagem</button>
 </div>
 </div>
 </div>
 </aside>
 <script>
-    (() => {
-      const launcher = document.getElementById("sinkaSupportLauncher");
-      const panel = document.getElementById("sinkaSupportPanel");
-      const close = document.getElementById("sinkaSupportClose");
-      const home = document.getElementById("supportHome");
-      const formView = document.getElementById("supportFormView");
-      const success = document.getElementById("supportSuccess");
-      const back = document.getElementById("supportBack");
-      const form = document.getElementById("sinkaSupportForm");
-      const typeInput = document.getElementById("supportType");
-      const title = document.getElementById("supportFormTitle");
-      const subject = document.getElementById("supportSubject");
-      const name = document.getElementById("supportName");
-      const email = document.getElementById("supportEmail");
-      const message = document.getElementById("supportMessage");
-      const newMessage = document.getElementById("supportNewMessage");
-      const choices = document.querySelectorAll("[data-support-type]");
+(() => {
+  const launcher = document.getElementById("sinkaSupportLauncher");
+  const panel = document.getElementById("sinkaSupportPanel");
+  const close = document.getElementById("sinkaSupportClose");
+  const home = document.getElementById("supportHome");
+  const formView = document.getElementById("supportFormView");
+  const success = document.getElementById("supportSuccess");
+  const back = document.getElementById("supportBack");
+  const form = document.getElementById("sinkaSupportForm");
+  const typeInput = document.getElementById("supportType");
+  const title = document.getElementById("supportFormTitle");
+  const subject = document.getElementById("supportSubject");
+  const name = document.getElementById("supportName");
+  const email = document.getElementById("supportEmail");
+  const message = document.getElementById("supportMessage");
+  const website = document.getElementById("supportWebsite");
+  const newMessage = document.getElementById("supportNewMessage");
+  const errorBox = document.getElementById("supportFormError");
+  const submitButton = form ? form.querySelector(".support-submit") : null;
+  const choices = document.querySelectorAll("[data-support-type]");
 
-      if (!launcher || !panel) return;
+  const SUPPORT_ENDPOINT =
+    "https://fmntfbhbbhqguuazpynj.supabase.co/functions/v1/sinka-support-message";
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_ruILUmHKIHTtrh9wHbA6kg_Y8CgqvWi";
 
-      const showView = (view) => {
-        [home, formView, success].forEach(v => v && v.classList.remove("active"));
-        view && view.classList.add("active");
-      };
+  if (!launcher || !panel || !form) return;
 
-      const openPanel = () => {
-        panel.classList.add("open");
-        launcher.setAttribute("aria-expanded","true");
-      };
+  const showView = (view) => {
+    [home, formView, success].forEach(v => v && v.classList.remove("active"));
+    view && view.classList.add("active");
+  };
 
-      const closePanel = () => {
-        panel.classList.remove("open");
-        launcher.setAttribute("aria-expanded","false");
-      };
+  const clearError = () => {
+    if (!errorBox) return;
+    errorBox.textContent = "";
+    errorBox.classList.remove("show");
+  };
 
-      launcher.addEventListener("click", () => {
-        panel.classList.contains("open") ? closePanel() : openPanel();
+  const showError = (text) => {
+    if (!errorBox) return;
+    errorBox.textContent = text;
+    errorBox.classList.add("show");
+  };
+
+  const resetSupportPanel = () => {
+    form.reset();
+    typeInput.value = "Dúvida sobre o Sinka";
+    title.textContent = "Dúvida sobre o Sinka";
+    subject.value = "Dúvida sobre o Sinka";
+    clearError();
+
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = "Enviar mensagem →";
+    }
+
+    showView(home);
+  };
+
+  const openPanel = () => {
+    panel.classList.add("open");
+    launcher.setAttribute("aria-expanded", "true");
+  };
+
+  const closePanel = () => {
+    panel.classList.remove("open");
+    launcher.setAttribute("aria-expanded", "false");
+    window.setTimeout(resetSupportPanel, 180);
+  };
+
+  launcher.addEventListener("click", (event) => {
+    event.stopPropagation();
+    panel.classList.contains("open") ? closePanel() : openPanel();
+  });
+
+  panel.addEventListener("click", (event) => {
+    event.stopPropagation();
+  });
+
+  close.addEventListener("click", closePanel);
+
+  document.addEventListener("click", () => {
+    if (panel.classList.contains("open")) closePanel();
+  });
+
+  choices.forEach(choice => {
+    choice.addEventListener("click", () => {
+      const type = choice.dataset.supportType || "Dúvida sobre o Sinka";
+      typeInput.value = type;
+      title.textContent = type;
+      subject.value = type;
+      clearError();
+      showView(formView);
+      window.setTimeout(() => name.focus(), 50);
+    });
+  });
+
+  back.addEventListener("click", () => {
+    clearError();
+    showView(home);
+  });
+
+  newMessage.addEventListener("click", resetSupportPanel);
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    clearError();
+
+    if (!form.reportValidity()) return;
+
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = "Enviando...";
+    }
+
+    const payload = {
+      nome: name.value.trim(),
+      email: email.value.trim(),
+      tipo: typeInput.value,
+      assunto: subject.value,
+      mensagem: message.value.trim(),
+      pagina: window.location.href,
+      website: website ? website.value : ""
+    };
+
+    try {
+      const response = await fetch(SUPPORT_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": SUPABASE_PUBLISHABLE_KEY
+        },
+        body: JSON.stringify(payload)
       });
 
-      close.addEventListener("click", closePanel);
+      let data = {};
+      try {
+        data = await response.json();
+      } catch (_) {}
 
-      choices.forEach(choice => {
-        choice.addEventListener("click", () => {
-          const type = choice.dataset.supportType || "Dúvida sobre o Sinka";
-          typeInput.value = type;
-          title.textContent = type;
-          subject.value = type;
-          showView(formView);
-          window.setTimeout(() => name.focus(), 50);
-        });
-      });
+      if (!response.ok || data.ok !== true) {
+        throw new Error(data.error || "Não foi possível enviar sua mensagem.");
+      }
 
-      back.addEventListener("click", () => showView(home));
+      showView(success);
 
-      newMessage.addEventListener("click", () => {
-        form.reset();
-        typeInput.value = "Dúvida sobre o Sinka";
-        title.textContent = "Dúvida sobre o Sinka";
-        subject.value = "Dúvida sobre o Sinka";
-        showView(home);
-      });
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = "Enviar mensagem →";
+      }
+    } catch (error) {
+      console.error("Sinka suporte:", error);
 
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
+      showError(
+        error && error.message
+          ? error.message
+          : "Não foi possível enviar agora. Tente novamente em instantes."
+      );
 
-        if (!form.reportValidity()) return;
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = "Enviar mensagem →";
+      }
+    }
+  });
 
-        const page = window.location.href;
-        const mailSubject = `[Sinka] ${subject.value}`;
-        const mailBody =
-`Nome: ${name.value}
-E-mail: ${email.value}
-Tipo: ${typeInput.value}
-
-Mensagem:
-${message.value}
-
-Página de origem:
-${page}`;
-
-        const mailto = `mailto:sinkagest@gmail.com?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
-        window.location.href = mailto;
-        showView(success);
-      });
-
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && panel.classList.contains("open")) closePanel();
-      });
-    })();
-  </script>
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && panel.classList.contains("open")) {
+      closePanel();
+    }
+  });
+})();
+</script>
 </body>
 </html>
