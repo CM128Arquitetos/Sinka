@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 
-
- SINKA SITE COMERCIAL — MOD 09 / POR QUE SINKA + FUNCIONALIDADES PREMIUM 
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"/>
@@ -267,7 +265,7 @@
     .task-row span{color:#839088}
     .date-pill{padding:3px 5px;border-radius:8px;background:#eef5f1;color:#507165;font-size:5.6px;font-weight:800}
     .floating-card{
-      position:absolute;right:-38px;bottom:56px;width:166px;padding:15px;background:#fff;border:1px solid #dfe8e3;
+      position:absolute;right:-38px;bottom:56px;width:166px;padding:16px 17px;background:#fff;border:1px solid #dfe8e3;
       border-radius:16px;box-shadow:0 18px 45px rgba(7,45,36,.14);transform:rotate(-2deg)
     }
     .floating-card small{font-size:7px;color:#809087;text-transform:uppercase;font-weight:800}
@@ -1928,7 +1926,7 @@
     .support-choice{
       width:100%;
       display:grid;
-      grid-template-columns:42px 1fr 24px;
+      grid-template-columns:1fr 24px;
       gap:12px;
       align-items:center;
       padding:15px;
@@ -1945,18 +1943,6 @@
       background:rgba(255,255,255,.085);
       border-color:rgba(255,255,255,.15);
       transform:translateY(-1px);
-    }
-
-    .support-choice-icon{
-      width:42px;
-      height:42px;
-      display:grid;
-      place-items:center;
-      border-radius:14px;
-      background:#fff;
-      color:#0A221A;
-      font-size:16px;
-      font-weight:900;
     }
 
     .support-choice strong{
@@ -3067,7 +3053,7 @@ const topbar = document.getElementById("topbar");
 <!-- Sinka — Dúvidas / Suporte -->
 <button aria-controls="sinkaSupportPanel" aria-expanded="false" aria-haspopup="dialog" class="sinka-support-launcher" id="sinkaSupportLauncher" type="button">
 <span class="support-launcher-icon">?</span>
-<span>Dúvidas ou suporte</span>
+<span>Dúvidas / Suporte</span>
 </button>
 <aside aria-labelledby="sinkaSupportTitle" aria-modal="false" class="sinka-support-panel" id="sinkaSupportPanel" role="dialog">
 <div class="support-panel-head">
@@ -3080,7 +3066,6 @@ const topbar = document.getElementById("topbar");
 <div class="support-view active" id="supportHome">
 <div class="support-choice-grid">
 <button class="support-choice" data-support-type="Dúvida sobre o Sinka" type="button">
-<span class="support-choice-icon">?</span>
 <span>
 <strong>Dúvida sobre o Sinka</strong>
 <span>Planos, funcionalidades, teste grátis e como o sistema funciona.</span>
@@ -3088,15 +3073,13 @@ const topbar = document.getElementById("topbar");
 <span class="support-choice-arrow">→</span>
 </button>
 <button class="support-choice" data-support-type="Suporte" type="button">
-<span class="support-choice-icon">S</span>
 <span>
-<strong>Preciso de suporte</strong>
+<strong>Suporte</strong>
 <span>Ajuda com acesso, uso do sistema ou alguma dificuldade técnica.</span>
 </span>
 <span class="support-choice-arrow">→</span>
 </button>
 <button class="support-choice" data-support-type="Sugestão" type="button">
-<span class="support-choice-icon">+</span>
 <span>
 <strong>Enviar uma sugestão</strong>
 <span>Conte uma ideia ou melhoria que você gostaria de ver no Sinka.</span>
