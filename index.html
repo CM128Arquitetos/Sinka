@@ -1780,7 +1780,406 @@
       .feature-primary h3{font-size:34px}
       .feature-management-metrics{grid-template-columns:1fr}
     }
-</style>
+
+    /* ==========================================================
+       SINKA — WIDGET FLUTUANTE DE DÚVIDAS / SUPORTE
+       ========================================================== */
+    .sinka-support-launcher{
+      position:fixed;
+      right:22px;
+      bottom:22px;
+      z-index:9500;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      min-height:48px;
+      padding:0 18px;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:999px;
+      background:#0A221A;
+      color:#fff;
+      box-shadow:0 16px 38px rgba(10,34,26,.20);
+      font-size:13px;
+      font-weight:800;
+      cursor:pointer;
+      transition:transform .22s ease, box-shadow .22s ease, background .22s ease;
+    }
+
+    .sinka-support-launcher:hover{
+      transform:translateY(-2px);
+      background:#123A2E;
+      box-shadow:0 20px 44px rgba(10,34,26,.26);
+    }
+
+    .sinka-support-launcher .support-launcher-icon{
+      width:27px;
+      height:27px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      background:var(--red);
+      color:#fff;
+      font-size:14px;
+      font-weight:900;
+      box-shadow:0 0 0 5px rgba(214,23,26,.10);
+    }
+
+    .sinka-support-panel{
+      position:fixed;
+      right:22px;
+      bottom:82px;
+      z-index:9501;
+      width:min(398px,calc(100vw - 28px));
+      max-height:min(690px,calc(100vh - 110px));
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+      border-radius:26px;
+      background:#0A221A;
+      color:#fff;
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:0 28px 74px rgba(10,34,26,.30);
+      opacity:0;
+      visibility:hidden;
+      transform:translateY(14px) scale(.985);
+      transform-origin:bottom right;
+      transition:opacity .22s ease, transform .22s ease, visibility .22s ease;
+    }
+
+    .sinka-support-panel.open{
+      opacity:1;
+      visibility:visible;
+      transform:translateY(0) scale(1);
+    }
+
+    .support-panel-head{
+      position:relative;
+      padding:25px 56px 21px 24px;
+      background:
+        radial-gradient(circle at 88% 0%,rgba(214,23,26,.20),transparent 36%),
+        #0A221A;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    .support-panel-head small{
+      display:block;
+      margin-bottom:9px;
+      color:#8eb4a7;
+      font-size:9px;
+      font-weight:800;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+    }
+
+    .support-panel-head h3{
+      margin:0;
+      font-size:27px;
+      line-height:1.04;
+      letter-spacing:-.045em;
+      color:#fff;
+    }
+
+    .support-panel-head p{
+      margin:11px 0 0;
+      color:#b8cdc5;
+      font-size:12px;
+      line-height:1.6;
+    }
+
+    .support-close{
+      position:absolute;
+      right:16px;
+      top:16px;
+      width:34px;
+      height:34px;
+      display:grid;
+      place-items:center;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:50%;
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      font-size:18px;
+      line-height:1;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+
+    .support-close:hover{
+      background:rgba(255,255,255,.12);
+      transform:rotate(4deg);
+    }
+
+    .support-panel-body{
+      padding:18px;
+      overflow:auto;
+      scrollbar-width:thin;
+      scrollbar-color:rgba(255,255,255,.16) transparent;
+    }
+
+    .support-view{display:none}
+    .support-view.active{display:block}
+
+    .support-choice-grid{
+      display:grid;
+      gap:10px;
+    }
+
+    .support-choice{
+      width:100%;
+      display:grid;
+      grid-template-columns:42px 1fr 24px;
+      gap:12px;
+      align-items:center;
+      padding:15px;
+      border:1px solid rgba(255,255,255,.09);
+      border-radius:18px;
+      background:rgba(255,255,255,.055);
+      color:#fff;
+      text-align:left;
+      cursor:pointer;
+      transition:background .2s ease,border-color .2s ease,transform .2s ease;
+    }
+
+    .support-choice:hover{
+      background:rgba(255,255,255,.085);
+      border-color:rgba(255,255,255,.15);
+      transform:translateY(-1px);
+    }
+
+    .support-choice-icon{
+      width:42px;
+      height:42px;
+      display:grid;
+      place-items:center;
+      border-radius:14px;
+      background:#fff;
+      color:#0A221A;
+      font-size:16px;
+      font-weight:900;
+    }
+
+    .support-choice strong{
+      display:block;
+      font-size:13px;
+      color:#fff;
+    }
+
+    .support-choice span{
+      display:block;
+      margin-top:4px;
+      color:#91afa4;
+      font-size:10.5px;
+      line-height:1.45;
+    }
+
+    .support-choice-arrow{
+      color:#D6171A;
+      font-size:17px;
+      font-weight:900;
+      text-align:right;
+    }
+
+    .support-direct{
+      margin-top:13px;
+      padding:13px 15px;
+      border-radius:16px;
+      background:rgba(0,0,0,.14);
+      border:1px solid rgba(255,255,255,.06);
+      color:#90aca2;
+      font-size:10.5px;
+      line-height:1.55;
+    }
+
+    .support-direct a{
+      color:#fff;
+      font-weight:800;
+      border-bottom:1px solid rgba(255,255,255,.22);
+    }
+
+    .support-form-top{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:15px;
+    }
+
+    .support-back{
+      width:34px;
+      height:34px;
+      display:grid;
+      place-items:center;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:50%;
+      background:rgba(255,255,255,.05);
+      color:#fff;
+      cursor:pointer;
+    }
+
+    .support-form-top div strong{
+      display:block;
+      font-size:13px;
+      color:#fff;
+    }
+
+    .support-form-top div span{
+      display:block;
+      margin-top:3px;
+      color:#87a69a;
+      font-size:10px;
+    }
+
+    .support-form{
+      display:grid;
+      gap:11px;
+    }
+
+    .support-field label{
+      display:block;
+      margin:0 0 6px;
+      color:#a7c0b7;
+      font-size:9.5px;
+      font-weight:800;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+
+    .support-field input,
+    .support-field select,
+    .support-field textarea{
+      width:100%;
+      border:1px solid #dfe6e2;
+      border-radius:13px;
+      background:#fff;
+      color:#0A221A;
+      outline:none;
+      padding:12px 13px;
+      font:inherit;
+      font-size:12px;
+      transition:border-color .2s ease,box-shadow .2s ease;
+    }
+
+    .support-field textarea{
+      min-height:112px;
+      resize:vertical;
+      line-height:1.5;
+    }
+
+    .support-field input:focus,
+    .support-field select:focus,
+    .support-field textarea:focus{
+      border-color:#74a090;
+      box-shadow:0 0 0 3px rgba(116,160,144,.13);
+    }
+
+    .support-submit{
+      width:100%;
+      min-height:46px;
+      margin-top:2px;
+      border:0;
+      border-radius:14px;
+      background:var(--red);
+      color:#fff;
+      font-size:12px;
+      font-weight:850;
+      cursor:pointer;
+      box-shadow:0 12px 26px rgba(214,23,26,.18);
+      transition:transform .2s ease,background .2s ease,box-shadow .2s ease;
+    }
+
+    .support-submit:hover{
+      transform:translateY(-1px);
+      background:var(--red-dark);
+      box-shadow:0 15px 30px rgba(214,23,26,.25);
+    }
+
+    .support-form-note{
+      margin:10px 2px 0;
+      color:#78968b;
+      font-size:9.5px;
+      line-height:1.5;
+      text-align:center;
+    }
+
+    .support-success{
+      padding:16px;
+      border-radius:18px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.09);
+      text-align:center;
+    }
+
+    .support-success-icon{
+      width:48px;
+      height:48px;
+      display:grid;
+      place-items:center;
+      margin:0 auto 13px;
+      border-radius:50%;
+      background:#fff;
+      color:#0A221A;
+      font-size:22px;
+      font-weight:900;
+    }
+
+    .support-success h4{
+      margin:0;
+      color:#fff;
+      font-size:18px;
+    }
+
+    .support-success p{
+      margin:8px 0 0;
+      color:#97b3a9;
+      font-size:11px;
+      line-height:1.55;
+    }
+
+    .support-success button{
+      margin-top:14px;
+      min-height:38px;
+      padding:0 16px;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      font-size:10.5px;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    @media(max-width:640px){
+      .sinka-support-launcher{
+        right:14px;
+        bottom:14px;
+      }
+
+      .sinka-support-panel{
+        right:14px;
+        bottom:72px;
+        width:calc(100vw - 28px);
+        max-height:calc(100vh - 92px);
+        border-radius:22px;
+      }
+
+      .support-panel-head{
+        padding:22px 54px 18px 20px;
+      }
+
+      .support-panel-head h3{
+        font-size:24px;
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      .sinka-support-panel,
+      .sinka-support-launcher,
+      .support-choice,
+      .support-submit{
+        transition:none!important;
+      }
+    }
+
+  </style>
 </head>
 <body class="sinka-intro-running">
 <!-- Abertura Sinka — montagem, zoom no K e frase -->
@@ -2340,5 +2739,203 @@ const topbar = document.getElementById("topbar");
 
     document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
   </script>
+
+  <!-- Sinka — Dúvidas / Suporte -->
+  <button class="sinka-support-launcher" id="sinkaSupportLauncher" type="button" aria-haspopup="dialog" aria-controls="sinkaSupportPanel" aria-expanded="false">
+    <span class="support-launcher-icon">?</span>
+    <span>Dúvidas ou suporte</span>
+  </button>
+
+  <aside class="sinka-support-panel" id="sinkaSupportPanel" role="dialog" aria-modal="false" aria-labelledby="sinkaSupportTitle">
+    <div class="support-panel-head">
+      <small>Sinka — atendimento</small>
+      <h3 id="sinkaSupportTitle">Como podemos ajudar?</h3>
+      <p>Escolha uma opção e conte pra gente o que você precisa.</p>
+      <button class="support-close" id="sinkaSupportClose" type="button" aria-label="Fechar">×</button>
+    </div>
+
+    <div class="support-panel-body">
+      <div class="support-view active" id="supportHome">
+        <div class="support-choice-grid">
+          <button class="support-choice" type="button" data-support-type="Dúvida sobre o Sinka">
+            <span class="support-choice-icon">?</span>
+            <span>
+              <strong>Dúvida sobre o Sinka</strong>
+              <span>Planos, funcionalidades, teste grátis e como o sistema funciona.</span>
+            </span>
+            <span class="support-choice-arrow">→</span>
+          </button>
+
+          <button class="support-choice" type="button" data-support-type="Suporte">
+            <span class="support-choice-icon">S</span>
+            <span>
+              <strong>Preciso de suporte</strong>
+              <span>Ajuda com acesso, uso do sistema ou alguma dificuldade técnica.</span>
+            </span>
+            <span class="support-choice-arrow">→</span>
+          </button>
+
+          <button class="support-choice" type="button" data-support-type="Sugestão">
+            <span class="support-choice-icon">+</span>
+            <span>
+              <strong>Enviar uma sugestão</strong>
+              <span>Conte uma ideia ou melhoria que você gostaria de ver no Sinka.</span>
+            </span>
+            <span class="support-choice-arrow">→</span>
+          </button>
+        </div>
+
+        <div class="support-direct">
+          Prefere falar por e-mail? <a href="mailto:sinkagest@gmail.com">sinkagest@gmail.com</a>
+        </div>
+      </div>
+
+      <div class="support-view" id="supportFormView">
+        <div class="support-form-top">
+          <button class="support-back" id="supportBack" type="button" aria-label="Voltar">←</button>
+          <div>
+            <strong id="supportFormTitle">Dúvida sobre o Sinka</strong>
+            <span>Responderemos pelo e-mail informado.</span>
+          </div>
+        </div>
+
+        <form class="support-form" id="sinkaSupportForm">
+          <input type="hidden" id="supportType" name="tipo" value="Dúvida sobre o Sinka">
+
+          <div class="support-field">
+            <label for="supportName">Nome</label>
+            <input id="supportName" name="nome" type="text" autocomplete="name" placeholder="Seu nome" required>
+          </div>
+
+          <div class="support-field">
+            <label for="supportEmail">E-mail</label>
+            <input id="supportEmail" name="email" type="email" autocomplete="email" placeholder="voce@email.com" required>
+          </div>
+
+          <div class="support-field">
+            <label for="supportSubject">Assunto</label>
+            <select id="supportSubject" name="assunto">
+              <option>Dúvida sobre o Sinka</option>
+              <option>Suporte</option>
+              <option>Sugestão</option>
+            </select>
+          </div>
+
+          <div class="support-field">
+            <label for="supportMessage">Mensagem</label>
+            <textarea id="supportMessage" name="mensagem" placeholder="Descreva sua dúvida ou solicitação..." required></textarea>
+          </div>
+
+          <button class="support-submit" type="submit">Enviar mensagem →</button>
+        </form>
+
+        <p class="support-form-note">
+          Nesta versão, o envio abre seu aplicativo de e-mail com a mensagem já preenchida.
+        </p>
+      </div>
+
+      <div class="support-view" id="supportSuccess">
+        <div class="support-success">
+          <div class="support-success-icon">✓</div>
+          <h4>Mensagem preparada.</h4>
+          <p>Seu aplicativo de e-mail foi aberto com os dados preenchidos. Basta confirmar o envio.</p>
+          <button type="button" id="supportNewMessage">Nova mensagem</button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <script>
+    (() => {
+      const launcher = document.getElementById("sinkaSupportLauncher");
+      const panel = document.getElementById("sinkaSupportPanel");
+      const close = document.getElementById("sinkaSupportClose");
+      const home = document.getElementById("supportHome");
+      const formView = document.getElementById("supportFormView");
+      const success = document.getElementById("supportSuccess");
+      const back = document.getElementById("supportBack");
+      const form = document.getElementById("sinkaSupportForm");
+      const typeInput = document.getElementById("supportType");
+      const title = document.getElementById("supportFormTitle");
+      const subject = document.getElementById("supportSubject");
+      const name = document.getElementById("supportName");
+      const email = document.getElementById("supportEmail");
+      const message = document.getElementById("supportMessage");
+      const newMessage = document.getElementById("supportNewMessage");
+      const choices = document.querySelectorAll("[data-support-type]");
+
+      if (!launcher || !panel) return;
+
+      const showView = (view) => {
+        [home, formView, success].forEach(v => v && v.classList.remove("active"));
+        view && view.classList.add("active");
+      };
+
+      const openPanel = () => {
+        panel.classList.add("open");
+        launcher.setAttribute("aria-expanded","true");
+      };
+
+      const closePanel = () => {
+        panel.classList.remove("open");
+        launcher.setAttribute("aria-expanded","false");
+      };
+
+      launcher.addEventListener("click", () => {
+        panel.classList.contains("open") ? closePanel() : openPanel();
+      });
+
+      close.addEventListener("click", closePanel);
+
+      choices.forEach(choice => {
+        choice.addEventListener("click", () => {
+          const type = choice.dataset.supportType || "Dúvida sobre o Sinka";
+          typeInput.value = type;
+          title.textContent = type;
+          subject.value = type;
+          showView(formView);
+          window.setTimeout(() => name.focus(), 50);
+        });
+      });
+
+      back.addEventListener("click", () => showView(home));
+
+      newMessage.addEventListener("click", () => {
+        form.reset();
+        typeInput.value = "Dúvida sobre o Sinka";
+        title.textContent = "Dúvida sobre o Sinka";
+        subject.value = "Dúvida sobre o Sinka";
+        showView(home);
+      });
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        if (!form.reportValidity()) return;
+
+        const page = window.location.href;
+        const mailSubject = `[Sinka] ${subject.value}`;
+        const mailBody =
+`Nome: ${name.value}
+E-mail: ${email.value}
+Tipo: ${typeInput.value}
+
+Mensagem:
+${message.value}
+
+Página de origem:
+${page}`;
+
+        const mailto = `mailto:sinkagest@gmail.com?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
+        window.location.href = mailto;
+        showView(success);
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && panel.classList.contains("open")) closePanel();
+      });
+    })();
+  </script>
+
 </body>
 </html>
