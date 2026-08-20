@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- SINKA SITE COMERCIAL — NAV V5 / DESTAQUE PREMIUM NO MENU -->
+<!-- SINKA SITE COMERCIAL — NAV V6 / MENU MAIS LIMPO E PROFISSIONAL -->
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
@@ -79,66 +79,61 @@
     .brand img{width:148px;height:auto}
     .nav-hub{
       margin-left:auto;
-      display:flex;align-items:center;gap:14px;
-      padding:10px 12px 10px 18px;
+      width:min(900px, calc(100vw - 340px));
+      display:flex;align-items:center;justify-content:space-between;gap:18px;
+      padding:12px 14px 12px 24px;
       border-radius:999px;
-      background:rgba(255,255,255,.72);
-      border:1px solid rgba(7,48,38,.09);
-      box-shadow:0 18px 40px rgba(7,48,38,.08), inset 0 1px 0 rgba(255,255,255,.55);
+      background:rgba(255,255,255,.82);
+      border:1px solid rgba(7,48,38,.08);
+      box-shadow:0 16px 36px rgba(7,48,38,.08), inset 0 1px 0 rgba(255,255,255,.6);
       backdrop-filter:blur(14px);
-      transition:transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
-      position:relative;
-      overflow:hidden
+      transition:box-shadow .24s ease, background .24s ease, border-color .24s ease;
+      position:relative
     }
-    .nav-hub::before{
-      content:"";
-      position:absolute;inset:0;
-      background:linear-gradient(90deg, rgba(20,86,70,.03), rgba(214,23,26,.06));
-      opacity:.9;
-      pointer-events:none
-    }
+    .nav-hub::before{display:none}
     .topbar.scrolled .nav-hub{
-      background:rgba(255,255,255,.88);
-      border-color:rgba(7,48,38,.11);
-      box-shadow:0 20px 44px rgba(7,48,38,.10), inset 0 1px 0 rgba(255,255,255,.65)
+      background:rgba(255,255,255,.92);
+      border-color:rgba(7,48,38,.10);
+      box-shadow:0 18px 40px rgba(7,48,38,.11), inset 0 1px 0 rgba(255,255,255,.7)
     }
     .navlinks{
-      position:relative;z-index:1;
-      display:flex;align-items:center;gap:8px;
-      font-size:15px;font-weight:820;
-      letter-spacing:-.018em
+      position:relative;z-index:1;flex:1;
+      display:flex;align-items:center;justify-content:center;gap:10px;
+      font-size:16px;font-weight:820;
+      letter-spacing:-.02em
     }
     .navlinks a{
       position:relative;
       display:inline-flex;align-items:center;justify-content:center;
-      min-height:46px;
-      padding:0 18px;
+      min-height:50px;
+      padding:0 22px;
       border-radius:999px;
-      color:#244a3f;
-      transition:color .24s ease,transform .24s ease, box-shadow .24s ease;
+      color:#21483d;
+      transition:color .24s ease,transform .24s ease, background .24s ease;
       isolation:isolate
     }
     .navlinks a::before{
       content:"";
       position:absolute;inset:0;
       border-radius:999px;
-      background:linear-gradient(135deg, rgba(7,48,38,.08), rgba(214,23,26,.14));
+      background:rgba(7,48,38,.055);
       border:1px solid rgba(7,48,38,.06);
       opacity:0;
-      transform:scale(.92);
-      transition:opacity .24s ease, transform .24s ease, border-color .24s ease;
+      transform:scale(.96);
+      transition:opacity .22s ease, transform .22s ease;
       z-index:-1
     }
     .navlinks a::after{
       content:"";
       position:absolute;
-      left:50%;bottom:8px;
-      width:6px;height:6px;
-      border-radius:50%;
-      background:var(--red);
-      transform:translateX(-50%) scale(.4);
+      left:18px;right:18px;bottom:9px;
+      height:2px;
+      border-radius:999px;
+      background:linear-gradient(90deg, var(--green), var(--red));
+      transform:scaleX(.35);
+      transform-origin:center;
       opacity:0;
-      transition:transform .24s ease, opacity .24s ease
+      transition:transform .22s ease, opacity .22s ease
     }
     .navlinks a:hover,
     .navlinks a:focus-visible{
@@ -153,9 +148,13 @@
     .navlinks a:hover::after,
     .navlinks a:focus-visible::after{
       opacity:1;
-      transform:translateX(-50%) scale(1)
+      transform:scaleX(1)
     }
-    .nav-actions{position:relative;z-index:1;display:flex;align-items:center;gap:10px}
+    .nav-actions{
+      position:relative;z-index:1;display:flex;align-items:center;gap:10px;
+      padding-left:18px;
+      border-left:1px solid rgba(7,48,38,.08)
+    }
     .btn{
       min-height:46px;padding:0 20px;border-radius:999px;border:1px solid transparent;
       display:inline-flex;align-items:center;justify-content:center;gap:8px;
@@ -164,15 +163,15 @@
     .btn-outline{border-color:#cfdcd5;background:rgba(255,255,255,.7);color:var(--ink)}
     .btn-outline:hover{border-color:#9db5aa;background:#fff}
     .btn-primary{
-      min-height:52px;padding:0 28px;
-      background:linear-gradient(135deg,#f21f24 0%, #c90d12 100%);color:#fff;
-      font-size:15px;font-weight:880;letter-spacing:-.02em;
-      box-shadow:0 16px 34px rgba(214,23,26,.26), inset 0 1px 0 rgba(255,255,255,.24)
+      min-height:54px;padding:0 32px;
+      background:linear-gradient(135deg,#ef1b21 0%, #c70d12 100%);color:#fff;
+      font-size:16px;font-weight:900;letter-spacing:-.02em;
+      box-shadow:0 18px 34px rgba(214,23,26,.24), inset 0 1px 0 rgba(255,255,255,.24)
     }
     .btn-primary:hover{
-      background:linear-gradient(135deg,#ff3035 0%, #b7090e 100%);
+      background:linear-gradient(135deg,#ff3136 0%, #b2080d 100%);
       transform:translateY(-2px) scale(1.03);
-      box-shadow:0 20px 42px rgba(214,23,26,.34), inset 0 1px 0 rgba(255,255,255,.26)
+      box-shadow:0 22px 42px rgba(214,23,26,.32), inset 0 1px 0 rgba(255,255,255,.26)
     }
     .btn-dark{background:var(--green);color:#fff}
     .btn-dark:hover{background:#0a4335;transform:translateY(-1px)}
@@ -691,9 +690,10 @@
     .reveal.visible{opacity:1;transform:none}
 
     @media(max-width:1020px){
-      .nav-hub{padding:0;background:none;border:none;box-shadow:none;backdrop-filter:none;gap:10px;overflow:visible}
+      .nav-hub{width:auto;padding:0;background:none;border:none;box-shadow:none;backdrop-filter:none;gap:10px;overflow:visible}
       .nav-hub::before{display:none}
       .navlinks{display:none}
+      .nav-actions{padding-left:0;border-left:none}
       .menu-btn{display:block}
       .nav-actions .btn-outline{display:none}
       .hero{padding-top:138px;min-height:auto}
