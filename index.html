@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- SINKA SITE COMERCIAL — ANIMAÇÃO ZOOM NO K + FRASE V2 -->
+<!-- SINKA SITE COMERCIAL — POR QUE SINKA DINÂMICO V2 -->
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
@@ -210,68 +210,211 @@
     .problem-card h3{margin:1px 0 8px;font-size:20px;letter-spacing:-.03em}
     .problem-card p{margin:0;font-size:14px;line-height:1.65;color:var(--muted)}
 
-    /* Sync concept */
+
+    /* Sync concept — proposta dinâmica v2 */
     .sync-section{
-      padding:120px 0;
-      background:linear-gradient(135deg,#032c24 0%,#083a31 48%,#04261f 100%);
+      padding:128px 0;
+      background:
+        radial-gradient(circle at 82% 18%, rgba(214,23,26,.14), transparent 28%),
+        linear-gradient(135deg,#07271f 0%,#0A221A 56%,#0d3026 100%);
       color:#fff;position:relative;overflow:hidden
     }
+
     .sync-section::before{
-      content:"";position:absolute;right:-120px;top:-140px;width:420px;height:420px;border-radius:50%;
-      background:radial-gradient(circle,rgba(230,27,35,.22) 0%,rgba(230,27,35,0) 72%)
+      content:"";position:absolute;inset:0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size:58px 58px;
+      mask-image:linear-gradient(to right,transparent 0%,#000 28%,#000 100%);
+      opacity:.45;
+      pointer-events:none
     }
-    .sync-section::after{
-      content:"";position:absolute;left:-160px;bottom:-170px;width:420px;height:420px;border-radius:50%;
-      background:radial-gradient(circle,rgba(255,255,255,.09) 0%,rgba(255,255,255,0) 72%)
+
+    .sync-grid{
+      display:grid;grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);
+      gap:74px;align-items:center;position:relative;z-index:1
     }
-    .sync-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:64px;align-items:center;position:relative;z-index:1}
+
+    .sync-copy-block{position:relative;z-index:2}
     .sync-section .eyebrow{color:#9fcbbd}
-    .sync-section .section-title{color:#fff}
-    .sync-section .section-copy{color:#d9e7e2;max-width:560px}
-    .sync-note{margin:20px 0 0;max-width:560px;font-size:16px;line-height:1.75;color:#aac1b8}
-    .sync-pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
-    .sync-pills span{
-      padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.12);font-size:12px;font-weight:800;color:#f1f7f4;letter-spacing:.02em
+    .sync-section .section-title{color:#fff;max-width:560px}
+    .sync-section .section-copy{
+      color:#c0d2cb;max-width:570px;font-size:17px;line-height:1.75
     }
-    .why-panel{
-      position:relative;padding:34px;border-radius:30px;overflow:hidden;
-      background:linear-gradient(180deg,rgba(18,63,52,.92),rgba(7,40,33,.96));
-      border:1px solid rgba(255,255,255,.09);box-shadow:0 35px 70px rgba(0,0,0,.18)
+
+    .sync-short{
+      display:inline-flex;align-items:center;gap:10px;margin-top:24px;
+      padding:11px 15px;border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      font-size:12px;font-weight:800;color:#dce9e4
     }
-    .why-panel::before{
-      content:"";position:absolute;right:-90px;top:-120px;width:300px;height:300px;border-radius:50%;
-      background:radial-gradient(circle,rgba(230,27,35,.16) 0%,rgba(230,27,35,0) 72%)
+
+    .sync-short i{
+      width:8px;height:8px;border-radius:50%;background:var(--red);
+      box-shadow:0 0 0 5px rgba(214,23,26,.12)
     }
-    .why-panel::after{
-      content:"";position:absolute;left:-110px;bottom:-150px;width:280px;height:280px;border-radius:50%;
-      background:radial-gradient(circle,rgba(255,255,255,.08) 0%,rgba(255,255,255,0) 72%)
+
+    .sync-quote{
+      margin:30px 0 0;padding-left:20px;border-left:2px solid var(--red);
+      max-width:540px;color:#9fcbbd;font-size:14px;line-height:1.75
     }
-    .why-panel-head{position:relative;z-index:1;display:grid;grid-template-columns:104px 1fr;gap:24px;align-items:center;margin-bottom:26px}
-    .why-mark{
-      width:104px;height:104px;border-radius:28px;background:rgba(255,255,255,.97);
-      display:grid;place-items:center;box-shadow:0 18px 42px rgba(0,0,0,.18)
+
+    /* Painel dinâmico */
+    .sync-flow{
+      position:relative;min-height:530px;border-radius:34px;padding:36px;
+      background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.035));
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:0 32px 80px rgba(0,0,0,.22);
+      overflow:hidden
     }
-    .why-mark span{font-size:36px;font-weight:800;letter-spacing:-.06em;color:var(--green)}
-    .why-intro small{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:#9fcbbd;font-weight:800}
-    .why-intro h3{margin:10px 0 10px;font-size:30px;line-height:1.02;letter-spacing:-.05em;color:#fff}
-    .why-intro p{margin:0;max-width:430px;color:#c0d2cb;font-size:15px;line-height:1.7}
-    .why-list{position:relative;z-index:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-    .why-card{
-      padding:18px;border-radius:20px;background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.08);min-height:142px
+
+    .sync-flow::before{
+      content:"";position:absolute;width:320px;height:320px;border-radius:50%;
+      right:-90px;top:-110px;
+      background:radial-gradient(circle,rgba(214,23,26,.18),rgba(214,23,26,0) 70%)
     }
-    .why-card strong{display:flex;align-items:center;gap:10px;font-size:16px;color:#fff}
-    .why-card strong em{
-      width:28px;height:28px;border-radius:10px;background:rgba(255,255,255,.08);display:grid;place-items:center;
-      font-style:normal;font-size:11px;font-weight:800;color:#9fcbbd
+
+    .sync-flow-top{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:24px;
+      position:relative;z-index:2
     }
-    .why-card p{margin:12px 0 0;font-size:13px;line-height:1.65;color:#aac1b8}
-    .why-footer{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:16px}
-    .why-footer-item{padding:16px 18px;border-radius:18px;background:rgba(0,0,0,.12);border:1px solid rgba(255,255,255,.06)}
-    .why-footer-item strong{display:block;font-size:12px;color:#fff}
-    .why-footer-item span{display:block;margin-top:6px;font-size:11px;line-height:1.5;color:#98b4aa}
+
+    .sync-flow-label{
+      font-size:10px;text-transform:uppercase;letter-spacing:.16em;
+      color:#7da79a;font-weight:800
+    }
+
+    .sync-word{
+      margin-top:8px;font-size:46px;line-height:1;font-weight:800;
+      letter-spacing:-.06em;color:#fff
+    }
+
+    .sync-word .red-k{color:var(--red)}
+
+    .sync-live{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:9px 12px;border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.09);
+      font-size:10px;font-weight:800;color:#c7d9d2
+    }
+
+    .sync-live i{
+      width:7px;height:7px;border-radius:50%;background:#42d79e;
+      animation:sinkaLivePulse 1.8s ease-in-out infinite
+    }
+
+    .flow-area{
+      position:relative;margin-top:44px;height:340px
+    }
+
+    .flow-line{
+      position:absolute;left:50%;top:46px;bottom:46px;width:2px;
+      transform:translateX(-50%);
+      background:rgba(255,255,255,.10);
+      overflow:hidden
+    }
+
+    .flow-line::after{
+      content:"";position:absolute;left:0;top:-35%;width:100%;height:34%;
+      background:linear-gradient(to bottom,transparent,var(--red),transparent);
+      animation:sinkaFlow 3.2s linear infinite
+    }
+
+    .flow-center{
+      position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+      width:130px;height:130px;border-radius:50%;
+      display:grid;place-items:center;text-align:center;
+      background:#fff;color:var(--green);
+      box-shadow:0 22px 60px rgba(0,0,0,.26);
+      z-index:3
+    }
+
+    .flow-center strong{
+      display:block;font-size:28px;line-height:.95;letter-spacing:-.06em
+    }
+
+    .flow-center span{
+      display:block;margin-top:6px;font-size:8px;text-transform:uppercase;
+      letter-spacing:.15em;color:#6b7e76;font-weight:800
+    }
+
+    .flow-node{
+      position:absolute;width:190px;min-height:96px;
+      padding:17px 18px;border-radius:20px;
+      background:rgba(12,55,45,.92);
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:0 18px 40px rgba(0,0,0,.16);
+      transition:.25s ease
+    }
+
+    .flow-node:hover{
+      transform:translateY(-4px);
+      background:rgba(17,68,56,.96);
+      border-color:rgba(255,255,255,.18)
+    }
+
+    .flow-node strong{
+      display:flex;align-items:center;gap:9px;
+      color:#fff;font-size:14px
+    }
+
+    .flow-node strong em{
+      width:25px;height:25px;border-radius:8px;
+      display:grid;place-items:center;background:rgba(255,255,255,.08);
+      color:#9fcbbd;font-style:normal;font-size:10px
+    }
+
+    .flow-node p{
+      margin:9px 0 0;color:#91afa4;font-size:11px;line-height:1.55
+    }
+
+    .flow-node.n1{left:0;top:8px}
+    .flow-node.n2{right:0;top:62px}
+    .flow-node.n3{left:0;bottom:52px}
+    .flow-node.n4{right:0;bottom:0}
+
+    .flow-link{
+      position:absolute;height:1px;background:rgba(255,255,255,.12);
+      z-index:1
+    }
+
+    .flow-link.l1{left:190px;top:58px;width:calc(50% - 255px);transform:rotate(8deg);transform-origin:left center}
+    .flow-link.l2{right:190px;top:120px;width:calc(50% - 255px);transform:rotate(-9deg);transform-origin:right center}
+    .flow-link.l3{left:190px;bottom:105px;width:calc(50% - 255px);transform:rotate(-9deg);transform-origin:left center}
+    .flow-link.l4{right:190px;bottom:50px;width:calc(50% - 255px);transform:rotate(8deg);transform-origin:right center}
+
+    .sync-tagline{
+      position:relative;z-index:2;margin-top:28px;
+      display:grid;grid-template-columns:repeat(3,1fr);gap:10px
+    }
+
+    .sync-tagline div{
+      padding:14px 15px;border-radius:16px;
+      background:rgba(0,0,0,.12);border:1px solid rgba(255,255,255,.06)
+    }
+
+    .sync-tagline strong{
+      display:block;color:#fff;font-size:11px
+    }
+
+    .sync-tagline span{
+      display:block;margin-top:5px;color:#7fa496;font-size:10px;line-height:1.45
+    }
+
     .red-k{color:var(--red)}
+
+    @keyframes sinkaFlow{
+      from{transform:translateY(0)}
+      to{transform:translateY(390%)}
+    }
+
+    @keyframes sinkaLivePulse{
+      0%,100%{box-shadow:0 0 0 0 rgba(66,215,158,.28)}
+      50%{box-shadow:0 0 0 7px rgba(66,215,158,0)}
+    }
 
     /* Features — corporate / minimal / premium */
     .features-head{
@@ -495,6 +638,16 @@
       .why-intro h3{font-size:28px}
       .why-list,.why-footer{grid-template-columns:1fr}
       .sync-pills span{font-size:11px}
+
+      .sync-section{padding:88px 0}
+      .sync-flow{min-height:auto;padding:24px}
+      .flow-area{height:auto;display:grid;gap:12px;margin-top:28px}
+      .flow-line,.flow-center,.flow-link{display:none}
+      .flow-node{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;width:100%;min-height:auto}
+      .sync-tagline{grid-template-columns:1fr}
+      .sync-flow-top{display:block}
+      .sync-live{margin-top:14px}
+
       .plans{padding:84px 0}
       .cta-box{padding:44px 28px;display:block}.cta-actions{margin-top:30px}
       .footer-grid{grid-template-columns:1fr}.footer-bottom{display:block;line-height:1.8}
@@ -1311,56 +1464,73 @@
 
     <section class="sync-section">
       <div class="wrap sync-grid">
-        <div class="reveal">
+        <div class="sync-copy-block reveal">
           <div class="eyebrow">Por que Sinka?</div>
-          <h2 class="section-title">Gestão inteligente para escritórios, feita para funcionar em sintonia.</h2>
+          <h2 class="section-title">Porque um escritório funciona melhor quando tudo está em sintonia.</h2>
+
           <p class="section-copy">
-            O Sinka é um sistema para organizar equipe, agenda, projetos, tarefas e documentos em um único ambiente — menos desencontro, mais clareza e mais controle para a rotina do escritório.
+            O Sinka é um sistema de gestão para escritórios que conecta equipe, agenda, projetos, tarefas e documentos em um único ambiente.
           </p>
-          <p class="sync-note">
-            O nome vem de <strong>sincronização</strong>. E o <span class="red-k">K</span> vermelho é o detalhe que dá personalidade à marca: tecnologia, organização e proximidade no mesmo sistema.
-          </p>
-          <div class="sync-pills">
-            <span>Equipe</span>
-            <span>Agenda</span>
-            <span>Projetos</span>
-            <span>Documentos</span>
+
+          <div class="sync-short">
+            <i></i>
+            Sinka vem de sincronização.
           </div>
+
+          <p class="sync-quote">
+            O <span class="red-k">K</span> vermelho quebra a uniformidade e dá personalidade à marca:
+            tecnologia e organização com uma identidade próxima, direta e memorável.
+          </p>
         </div>
 
-        <div class="why-panel reveal">
-          <div class="why-panel-head">
-            <div class="why-mark"><span>sin<span class="red-k">k</span>a</span></div>
-            <div class="why-intro">
-              <small>Sinka — Gestão inteligente para escritórios</small>
-              <h3>Um só lugar para o escritório trabalhar em sintonia.</h3>
-              <p>Centralize o que hoje fica espalhado em planilhas, conversas, agendas e arquivos.</p>
+        <div class="sync-flow reveal">
+          <div class="sync-flow-top">
+            <div>
+              <span class="sync-flow-label">Ecossistema Sinka</span>
+              <div class="sync-word">sin<span class="red-k">k</span>a</div>
             </div>
+            <div class="sync-live"><i></i> Tudo conectado</div>
           </div>
 
-          <div class="why-list">
-            <article class="why-card">
-              <strong><em>01</em> Equipe conectada</strong>
-              <p>Cada pessoa com seu próprio acesso, responsabilidade e contexto dentro do escritório.</p>
+          <div class="flow-area">
+            <div class="flow-line"></div>
+            <div class="flow-link l1"></div>
+            <div class="flow-link l2"></div>
+            <div class="flow-link l3"></div>
+            <div class="flow-link l4"></div>
+
+            <div class="flow-center">
+              <div>
+                <strong>Em<br>sintonia.</strong>
+                <span>um só fluxo</span>
+              </div>
+            </div>
+
+            <article class="flow-node n1">
+              <strong><em>01</em> Projetos</strong>
+              <p>Etapas, responsáveis, prazos e progresso reunidos no mesmo contexto.</p>
             </article>
-            <article class="why-card">
-              <strong><em>02</em> Projetos em fluxo</strong>
-              <p>Etapas, tarefas, responsáveis e prazos trabalhando juntos, sem controles paralelos.</p>
+
+            <article class="flow-node n2">
+              <strong><em>02</em> Equipe</strong>
+              <p>Cada pessoa com acesso, responsabilidade e visão do que precisa acontecer.</p>
             </article>
-            <article class="why-card">
-              <strong><em>03</em> Agenda sincronizada</strong>
-              <p>Compromissos ligados ao trabalho certo, com integração entre rotina e planejamento.</p>
+
+            <article class="flow-node n3">
+              <strong><em>03</em> Agenda</strong>
+              <p>Compromissos conectados aos projetos e à rotina real do escritório.</p>
             </article>
-            <article class="why-card">
-              <strong><em>04</em> Marca com personalidade</strong>
-              <p>O <span class="red-k">K</span> vermelho reforça uma identidade próxima, forte e memorável para a marca.</p>
+
+            <article class="flow-node n4">
+              <strong><em>04</em> Documentos</strong>
+              <p>Arquivos ligados ao contexto certo, sem informação espalhada.</p>
             </article>
           </div>
 
-          <div class="why-footer">
-            <div class="why-footer-item"><strong>Menos improviso</strong><span>Mais clareza para tocar a rotina.</span></div>
-            <div class="why-footer-item"><strong>Mais contexto</strong><span>Informação certa para decidir melhor.</span></div>
-            <div class="why-footer-item"><strong>Mais sintonia</strong><span>Equipe, agenda e projetos conectados.</span></div>
+          <div class="sync-tagline">
+            <div><strong>Menos desencontro</strong><span>Informação centralizada.</span></div>
+            <div><strong>Mais clareza</strong><span>Prioridades visíveis.</span></div>
+            <div><strong>Mais sintonia</strong><span>Equipe e projetos conectados.</span></div>
           </div>
         </div>
       </div>
