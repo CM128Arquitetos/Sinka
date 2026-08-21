@@ -2639,34 +2639,60 @@
       pointer-events:none;
     }
 
-    .brand-premium-connector{
+    .brand-premium-guides{
       position:absolute;
-      z-index:2;
-      height:1px;
-      background:linear-gradient(90deg,rgba(214,23,26,.54),rgba(255,255,255,.08));
-      transform-origin:left center;
+      inset:10px 8px 8px;
+      z-index:3;
+      width:calc(100% - 16px);
+      height:calc(100% - 18px);
       pointer-events:none;
-      opacity:.8;
+      overflow:visible;
     }
 
-    .connector-equipe{ left:23%; top:35%; width:86px; transform:rotate(10deg); }
-    .connector-agenda{ right:23%; top:35%; width:86px; transform:rotate(-10deg); transform-origin:right center; }
-    .connector-projetos{ left:23%; bottom:34%; width:84px; transform:rotate(-10deg); }
-    .connector-documentos{ right:23%; bottom:34%; width:86px; transform:rotate(10deg); transform-origin:right center; }
+    .brand-premium-guides .guide-main{
+      fill:none;
+      stroke:rgba(255,255,255,.12);
+      stroke-width:1.2;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+      stroke-dasharray:8 10;
+      animation:sinkaGuideFlow 14s linear infinite;
+    }
+
+    .brand-premium-guides .guide-accent{
+      fill:none;
+      stroke:rgba(214,23,26,.42);
+      stroke-width:1.3;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+      stroke-dasharray:20 150;
+      animation:sinkaGuidePulse 5.4s ease-in-out infinite;
+    }
+
+    .brand-premium-guides .guide-dot{
+      fill:#D6171A;
+      opacity:.9;
+      filter:drop-shadow(0 0 6px rgba(214,23,26,.5));
+      animation:sinkaGuideDot 2.6s ease-in-out infinite;
+    }
+
+    .brand-premium-guides .guide-dot.dot-2{ animation-delay:.8s; }
+    .brand-premium-guides .guide-dot.dot-3{ animation-delay:1.6s; }
+    .brand-premium-guides .guide-dot.dot-4{ animation-delay:2.1s; }
 
     .brand-premium-symbol{
       position:relative;
       z-index:5;
-      width:148px;
-      height:148px;
+      width:126px;
+      height:126px;
       display:grid;
       place-items:center;
-      border-radius:38px;
-      background:radial-gradient(circle at 50% 35%,rgba(20,72,58,.9),rgba(5,28,22,.98));
+      border-radius:34px;
+      background:radial-gradient(circle at 50% 35%,rgba(20,72,58,.92),rgba(5,28,22,.98));
       border:1px solid rgba(255,255,255,.11);
       box-shadow:
-        0 26px 54px rgba(0,0,0,.26),
-        0 0 0 12px rgba(255,255,255,.016);
+        0 24px 46px rgba(0,0,0,.24),
+        0 0 0 10px rgba(255,255,255,.014);
       overflow:hidden;
       transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease;
     }
@@ -2681,40 +2707,20 @@
     .brand-premium-symbol::before{
       content:"";
       position:absolute;
-      inset:18px;
-      border-radius:28px;
+      inset:14px;
+      border-radius:24px;
       border:1px solid rgba(255,255,255,.06);
       pointer-events:none;
     }
 
-    .brand-symbol-svg{
-      width:116px;
-      height:116px;
-      overflow:visible;
+    .brand-premium-symbol img{
+      position:relative;
+      z-index:2;
+      width:86%;
+      height:86%;
+      object-fit:contain;
       filter:drop-shadow(0 12px 18px rgba(0,0,0,.16));
-    }
-
-    .brand-symbol-svg .stroke-white,
-    .brand-symbol-svg .stroke-red{
-      fill:none;
-      stroke-linecap:round;
-      stroke-linejoin:round;
-      stroke-width:24;
-      vector-effect:non-scaling-stroke;
-    }
-
-    .brand-symbol-svg .stroke-white{
-      stroke:#fff;
-      stroke-dasharray:260;
-      stroke-dashoffset:260;
-      animation:sinkaBuildWhite 4.8s cubic-bezier(.55,.08,.32,1) infinite;
-    }
-
-    .brand-symbol-svg .stroke-red{
-      stroke:#D6171A;
-      stroke-dasharray:275;
-      stroke-dashoffset:275;
-      animation:sinkaBuildRed 4.8s cubic-bezier(.55,.08,.32,1) infinite;
+      animation:sinkaLogoFloat 5s ease-in-out infinite;
     }
 
     .brand-premium-node-group{
@@ -2834,16 +2840,24 @@
       50%{box-shadow:0 0 0 9px rgba(67,211,157,0)}
     }
 
-    @keyframes sinkaBuildWhite{
-      0%,8%{stroke-dashoffset:260;opacity:0;transform:translate(-14px,-12px)}
-      16%{opacity:1}
-      38%,100%{stroke-dashoffset:0;opacity:1;transform:translate(0,0)}
+    @keyframes sinkaGuideFlow{
+      from{stroke-dashoffset:0}
+      to{stroke-dashoffset:-220}
     }
 
-    @keyframes sinkaBuildRed{
-      0%,24%{stroke-dashoffset:275;opacity:0;transform:translate(14px,12px)}
-      32%{opacity:1}
-      56%,100%{stroke-dashoffset:0;opacity:1;transform:translate(0,0)}
+    @keyframes sinkaGuidePulse{
+      0%,100%{stroke-dashoffset:180;opacity:.55}
+      50%{stroke-dashoffset:0;opacity:.95}
+    }
+
+    @keyframes sinkaGuideDot{
+      0%,100%{opacity:.35;transform:scale(.86)}
+      50%{opacity:1;transform:scale(1.16)}
+    }
+
+    @keyframes sinkaLogoFloat{
+      0%,100%{transform:translateY(0px)}
+      50%{transform:translateY(-4px)}
     }
 
     @media(max-width:720px){
@@ -2866,14 +2880,9 @@
       }
 
       .brand-premium-symbol{
-        width:132px;
-        height:132px;
-        border-radius:34px;
-      }
-
-      .brand-symbol-svg{
-        width:104px;
-        height:104px;
+        width:114px;
+        height:114px;
+        border-radius:30px;
       }
 
       .brand-premium-orbit.orbit-outer{
@@ -2911,10 +2920,7 @@
       .node-projetos{ left:3%; bottom:14%; }
       .node-documentos{ right:1%; bottom:14%; }
 
-      .connector-equipe{ left:19%; top:35%; width:56px; }
-      .connector-agenda{ right:19%; top:35%; width:56px; }
-      .connector-projetos{ left:20%; bottom:34%; width:55px; }
-      .connector-documentos{ right:19%; bottom:34%; width:56px; }
+      .brand-premium-guides{ inset:16px 4px 10px; }
 
       .brand-premium-message{
         grid-template-columns:1fr;
@@ -2929,15 +2935,11 @@
     @media(prefers-reduced-motion:reduce){
       .brand-premium-track,
       .brand-premium-live i,
-      .brand-symbol-svg .stroke-white,
-      .brand-symbol-svg .stroke-red{
+      .brand-premium-guides .guide-main,
+      .brand-premium-guides .guide-accent,
+      .brand-premium-guides .guide-dot,
+      .brand-premium-symbol img{
         animation:none!important;
-      }
-      .brand-symbol-svg .stroke-white,
-      .brand-symbol-svg .stroke-red{
-        stroke-dashoffset:0!important;
-        opacity:1!important;
-        transform:none!important;
       }
     }
 
@@ -3236,15 +3238,24 @@
 <div class="brand-premium-orbit orbit-outer"></div>
 <div class="brand-premium-orbit orbit-inner"></div>
 <div class="brand-premium-track"></div>
-<div class="brand-premium-connector connector-equipe"></div>
-<div class="brand-premium-connector connector-agenda"></div>
-<div class="brand-premium-connector connector-projetos"></div>
-<div class="brand-premium-connector connector-documentos"></div>
-<div class="brand-premium-symbol brand-premium-symbol-compose" aria-hidden="true">
-<svg class="brand-symbol-svg" fill="none" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
-<path class="stroke-white" d="M47 83C71 61 96 49 128 49C152 49 172 56 181 68C188 78 184 92 170 96C156 100 144 89 132 83C118 76 104 74 90 78C73 83 59 93 48 107"/>
-<path class="stroke-red" d="M172 139C157 151 138 161 117 167C93 174 72 171 58 159C47 150 42 138 45 127C48 117 57 109 69 109C81 109 91 117 102 124C115 132 128 139 143 143C156 147 168 145 180 138"/>
+<svg class="brand-premium-guides" viewBox="0 0 100 100" aria-hidden="true">
+  <path class="guide-main" d="M50 50 C42 48, 34 44, 26 34"/>
+  <path class="guide-main" d="M50 50 C58 47, 68 44, 76 35"/>
+  <path class="guide-main" d="M50 50 C42 54, 35 60, 28 68"/>
+  <path class="guide-main" d="M50 50 C58 53, 67 58, 75 68"/>
+
+  <path class="guide-accent" d="M50 50 C42 48, 34 44, 26 34"/>
+  <path class="guide-accent" d="M50 50 C58 47, 68 44, 76 35"/>
+  <path class="guide-accent" d="M50 50 C42 54, 35 60, 28 68"/>
+  <path class="guide-accent" d="M50 50 C58 53, 67 58, 75 68"/>
+
+  <circle class="guide-dot dot-1" cx="26" cy="34" r="1.2"/>
+  <circle class="guide-dot dot-2" cx="76" cy="35" r="1.2"/>
+  <circle class="guide-dot dot-3" cx="28" cy="68" r="1.2"/>
+  <circle class="guide-dot dot-4" cx="75" cy="68" r="1.2"/>
 </svg>
+<div class="brand-premium-symbol" aria-hidden="true">
+<img alt="Símbolo Sinka" src="symbol-sinka.png"/>
 </div>
 <div class="brand-premium-node-group">
 <div class="brand-orbit-node node-equipe">
