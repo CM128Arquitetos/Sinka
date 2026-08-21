@@ -2954,13 +2954,14 @@
       }, 3820);
 
       /*
-        A frase fica totalmente formada por volta de 4,9s
-        e permanece em leitura até ~7,2s.
+        A frase fica totalmente formada por volta de 4,9s.
+        A leitura + transição final ocupam os 1,1s restantes:
+        saída inicia em 5,65s e termina em ~6,0s.
       */
       window.setTimeout(() => {
         timelineReady = true;
         tryLeave();
-      }, 7200);
+      }, 5650);
 
       if (!domReady) {
         document.addEventListener("DOMContentLoaded", () => {
@@ -2974,7 +2975,7 @@
         domReady = true;
         timelineReady = true;
         tryLeave();
-      }, 8500);
+      }, 6500);
     })();
   </script>
 <header class="topbar" id="topbar">
