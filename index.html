@@ -2683,26 +2683,31 @@
     .brand-premium-symbol{
       position:relative;
       z-index:5;
-      width:132px;
-      height:132px;
+      width:124px;
+      height:124px;
       display:grid;
       place-items:center;
-      border-radius:36px;
-      background:radial-gradient(circle at 50% 34%,rgba(15,70,57,.96),rgba(6,28,22,.99));
-      border:1px solid rgba(255,255,255,.1);
+      border-radius:34px;
+      background:
+        radial-gradient(circle at 30% 24%,rgba(255,255,255,.06),transparent 34%),
+        linear-gradient(145deg,rgba(9,52,41,.96),rgba(4,23,19,.98));
+      border:1px solid rgba(255,255,255,.11);
       box-shadow:
-        0 24px 56px rgba(0,0,0,.25),
-        inset 0 1px 0 rgba(255,255,255,.05),
+        0 22px 52px rgba(0,0,0,.22),
+        inset 0 1px 0 rgba(255,255,255,.08),
+        inset 0 -16px 30px rgba(0,0,0,.16),
         0 0 0 10px rgba(255,255,255,.014);
       overflow:hidden;
+      isolation:isolate;
       transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease;
     }
 
     .brand-premium-visual:hover .brand-premium-symbol{
       transform:translateY(-2px) scale(1.02);
       box-shadow:
-        0 30px 66px rgba(0,0,0,.3),
-        inset 0 1px 0 rgba(255,255,255,.06),
+        0 30px 66px rgba(0,0,0,.28),
+        inset 0 1px 0 rgba(255,255,255,.08),
+        inset 0 -16px 30px rgba(0,0,0,.18),
         0 0 0 15px rgba(255,255,255,.018);
     }
 
@@ -2710,7 +2715,7 @@
       content:"";
       position:absolute;
       inset:12px;
-      border-radius:26px;
+      border-radius:24px;
       border:1px solid rgba(255,255,255,.06);
       pointer-events:none;
     }
@@ -2718,12 +2723,12 @@
     .brand-premium-symbol::after{
       content:"";
       position:absolute;
-      inset:-12px;
-      border-radius:42px;
-      background:radial-gradient(circle at center,rgba(214,23,26,.12),transparent 62%);
-      filter:blur(14px);
-      opacity:.7;
-      animation:sinkaSymbolAura 6.6s ease-in-out infinite;
+      inset:-16px;
+      border-radius:44px;
+      background:radial-gradient(circle at center,rgba(214,23,26,.16),transparent 60%);
+      filter:blur(18px);
+      opacity:.72;
+      animation:sinkaSymbolAuraPro 5.8s ease-in-out infinite;
       pointer-events:none;
     }
 
@@ -2733,41 +2738,58 @@
       width:96px;
       height:96px;
       display:block;
-      filter:drop-shadow(0 10px 22px rgba(0,0,0,.18));
+      filter:drop-shadow(0 14px 26px rgba(0,0,0,.20));
+      will-change:transform;
+      animation:sinkaSymbolDock 5.8s ease-in-out infinite;
     }
 
-    .brand-sinka-motion .logo-part{
+    .brand-sinka-motion .logo-part,
+    .brand-sinka-motion .logo-sheen,
+    .brand-sinka-motion .logo-glow{
       position:absolute;
       inset:0;
       width:100%;
       height:100%;
+    }
+
+    .brand-sinka-motion .logo-glow{
+      inset:-10%;
+      width:120%;
+      height:120%;
+      left:-10%;
+      top:-10%;
+      border-radius:50%;
+      background:radial-gradient(circle,rgba(255,255,255,.08) 0,rgba(255,255,255,0) 62%);
+      animation:sinkaGlowPulse 5.8s ease-in-out infinite;
+      pointer-events:none;
+    }
+
+    .brand-sinka-motion .logo-part{
       object-fit:contain;
-      will-change:transform,opacity;
+      will-change:transform,opacity,filter;
+      transform-style:preserve-3d;
     }
 
     .brand-sinka-motion .logo-part.white{
-      clip-path:inset(0 0 45% 0);
-      transform-origin:54% 42%;
-      animation:sinkaSymbolWhite 6.6s cubic-bezier(.22,.61,.36,1) infinite;
+      z-index:2;
+      transform-origin:56% 36%;
+      animation:sinkaWhiteAssemble 5.8s cubic-bezier(.22,.61,.36,1) infinite;
     }
 
     .brand-sinka-motion .logo-part.red{
-      clip-path:inset(48% 0 0 0);
-      transform-origin:46% 60%;
-      animation:sinkaSymbolRed 6.6s cubic-bezier(.22,.61,.36,1) infinite;
+      z-index:3;
+      transform-origin:43% 64%;
+      animation:sinkaRedAssemble 5.8s cubic-bezier(.22,.61,.36,1) infinite;
     }
 
-    .brand-sinka-motion .logo-core{
-      position:absolute;
-      left:50%;
-      top:50%;
-      width:110%;
-      height:110%;
-      border-radius:50%;
-      transform:translate(-50%,-50%);
-      background:radial-gradient(circle,rgba(255,255,255,.07) 0,rgba(255,255,255,0) 62%);
-      opacity:.8;
-      animation:sinkaCorePulse 6.6s ease-in-out infinite;
+    .brand-sinka-motion .logo-sheen{
+      z-index:4;
+      border-radius:28px;
+      background:linear-gradient(120deg,transparent 18%,rgba(255,255,255,.02) 36%,rgba(255,255,255,.42) 49%,rgba(255,255,255,.02) 62%,transparent 82%);
+      mix-blend-mode:screen;
+      opacity:0;
+      transform:translateX(-125%) skewX(-16deg);
+      animation:sinkaSheen 5.8s cubic-bezier(.22,.61,.36,1) infinite;
       pointer-events:none;
     }
 
@@ -2790,6 +2812,9 @@
       border:1px solid rgba(255,255,255,.075);
       box-shadow:0 12px 28px rgba(0,0,0,.14);
       backdrop-filter:blur(8px);
+      opacity:0;
+      transform:translateY(8px) scale(.96);
+      animation:sinkaNodeReveal 5.8s ease-in-out infinite;
     }
 
     .brand-orbit-node strong{
@@ -2816,10 +2841,10 @@
       line-height:1.45;
     }
 
-    .node-equipe{ left:8%; top:16%; }
-    .node-agenda{ right:7%; top:18%; }
-    .node-projetos{ left:9%; bottom:24%; }
-    .node-documentos{ right:8%; bottom:22%; }
+    .node-equipe{ left:8%; top:16%; animation-delay:.28s; }
+    .node-agenda{ right:7%; top:18%; animation-delay:.44s; }
+    .node-projetos{ left:9%; bottom:24%; animation-delay:.6s; }
+    .node-documentos{ right:8%; bottom:22%; animation-delay:.76s; }
 
     .brand-premium-bottom{
       position:relative;
@@ -2908,30 +2933,54 @@
       50%{transform:translateY(-4px)}
     }
 
-    @keyframes sinkaSymbolAura{
-      0%,100%{ transform:scale(.94); opacity:.52; }
-      35%,70%{ transform:scale(1.04); opacity:.78; }
+    @keyframes sinkaSymbolAuraPro{
+      0%,12%,100%{ transform:scale(.92); opacity:.42; }
+      24%,70%{ transform:scale(1.04); opacity:.72; }
+      82%{ transform:scale(.98); opacity:.54; }
     }
 
-    @keyframes sinkaCorePulse{
-      0%,100%{ transform:translate(-50%,-50%) scale(.92); opacity:.52; }
-      35%,70%{ transform:translate(-50%,-50%) scale(1.02); opacity:.84; }
+    @keyframes sinkaSymbolDock{
+      0%,100%{ transform:translateY(6px) scale(.96); }
+      20%,72%{ transform:translateY(0) scale(1); }
+      84%{ transform:translateY(-1px) scale(1.01); }
     }
 
-    @keyframes sinkaSymbolWhite{
-      0%{ transform:translate(-18px,-16px) rotate(-24deg) scale(.88); opacity:0; }
+    @keyframes sinkaGlowPulse{
+      0%,12%,100%{ transform:scale(.78); opacity:.16; }
+      24%,72%{ transform:scale(1); opacity:.44; }
+      84%{ transform:scale(.94); opacity:.26; }
+    }
+
+    @keyframes sinkaWhiteAssemble{
+      0%{ transform:translate(-34px,-24px) rotate(-36deg) scale(.62); opacity:0; filter:blur(5px); }
       10%{ opacity:1; }
-      22%,72%{ transform:translate(0,0) rotate(0deg) scale(1); opacity:1; }
-      84%{ transform:translate(-5px,-4px) rotate(-5deg) scale(1.02); opacity:1; }
-      100%{ transform:translate(-18px,-16px) rotate(-24deg) scale(.88); opacity:0; }
+      24%{ transform:translate(5px,-2px) rotate(5deg) scale(1.04); opacity:1; filter:blur(0); }
+      34%,72%{ transform:translate(0,0) rotate(0) scale(1); opacity:1; filter:blur(0); }
+      84%{ transform:translate(-2px,-1px) rotate(-2deg) scale(.992); opacity:1; }
+      100%{ transform:translate(-34px,-24px) rotate(-36deg) scale(.62); opacity:0; filter:blur(5px); }
     }
 
-    @keyframes sinkaSymbolRed{
-      0%{ transform:translate(18px,18px) rotate(24deg) scale(.88); opacity:0; }
+    @keyframes sinkaRedAssemble{
+      0%{ transform:translate(34px,24px) rotate(36deg) scale(.62); opacity:0; filter:blur(5px); }
       10%{ opacity:1; }
-      22%,72%{ transform:translate(0,0) rotate(0deg) scale(1); opacity:1; }
-      84%{ transform:translate(5px,4px) rotate(5deg) scale(1.02); opacity:1; }
-      100%{ transform:translate(18px,18px) rotate(24deg) scale(.88); opacity:0; }
+      24%{ transform:translate(-5px,2px) rotate(-5deg) scale(1.04); opacity:1; filter:blur(0); }
+      34%,72%{ transform:translate(0,0) rotate(0) scale(1); opacity:1; filter:blur(0); }
+      84%{ transform:translate(2px,1px) rotate(2deg) scale(.992); opacity:1; }
+      100%{ transform:translate(34px,24px) rotate(36deg) scale(.62); opacity:0; filter:blur(5px); }
+    }
+
+    @keyframes sinkaSheen{
+      0%,28%{ transform:translateX(-125%) skewX(-16deg); opacity:0; }
+      34%{ opacity:.0; }
+      42%{ opacity:.9; }
+      56%{ transform:translateX(126%) skewX(-16deg); opacity:.05; }
+      100%{ transform:translateX(126%) skewX(-16deg); opacity:0; }
+    }
+
+    @keyframes sinkaNodeReveal{
+      0%,14%,100%{ opacity:0; transform:translateY(8px) scale(.96); }
+      24%,78%{ opacity:1; transform:translateY(0) scale(1); }
+      86%{ opacity:.9; transform:translateY(2px) scale(.992); }
     }
 
     @media(max-width:720px){
@@ -3330,9 +3379,10 @@
 </svg>
 <div class="brand-premium-symbol" aria-hidden="true">
 <div class="brand-sinka-motion">
-<i class="logo-core"></i>
-<img alt="Símbolo Sinka" class="logo-part white" src="symbol-sinka.png"/>
-<img alt="Símbolo Sinka" class="logo-part red" src="symbol-sinka.png"/>
+<i class="logo-glow"></i>
+<img alt="Símbolo Sinka" class="logo-part white" src="symbol-sinka-white.png"/>
+<img alt="Símbolo Sinka" class="logo-part red" src="symbol-sinka-red.png"/>
+<i class="logo-sheen"></i>
 </div>
 </div>
 <div class="brand-premium-node-group">
